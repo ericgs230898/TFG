@@ -1,3 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TFG_Project</string>
+    <string name="inici_de_sessio">Inici de Sessió</string>
+    <string name="email">Adreça electrònica</string>
+    <string name="contrasenya">Contrasenya</string>
+    <string name="inicia_sessió">Inicia sessió</string>
+    <string name="sense_compte">No tens un compte encara?<br />Fes click AQUÍ per registrar-te!</string>
+    <string name="contrasenya_oblidada">Contrasenya oblidada?</string>
+    <string name="Registre">Registre</string>
+    <string name="Nom_d_usuari">Nom d'usuari</string>
+    <string name="Confirma_Contrasenya">Confirma Contrasenya</string>
+    <string name="Registrar_se">Registrar-se</string>
+    <string name="compteExistent">Ja tens compte?</string>
+
 </resources>
