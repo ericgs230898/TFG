@@ -12,5 +12,24 @@
     <string name="Confirma_Contrasenya">Confirma Contrasenya</string>
     <string name="Registrar_se">Registrar-se</string>
     <string name="compteExistent">Ja tens compte?</string>
+    <string name="menu_principal">Menú Principal</string>
+    <string name="crear_lliga_virtual">Crear Lliga Virtual</string>
+    <string name="unir_lliga_virtual">Unir-se Lliga Virtual</string>
+    <string name="meves_lligues">Les Meves Lligues</string>
+    <string name="nom">Nom Lliga</string>
+    <string name="participants">Participants</string>
+    <string name="competicio">Competició</string>
+    <string name="grup">Grup</string>
+    <string name="plantilla">Plantilla</string>
 
+
+    <string-array name="alineacions">
+        <item>4-3-3</item>
+        <item>4-4-2</item>
+        <item>4-2-3-1</item>
+        <item>3-5-2</item>
+        <item>3-4-3</item>
+        <item>5-3-2</item>
+        <item>5-4-1</item>
+    </string-array>
 </resources>
