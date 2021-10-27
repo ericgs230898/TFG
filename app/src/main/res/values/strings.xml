@@ -8,7 +8,7 @@
     <string name="sense_compte">No tens un compte encara?<br />Fes click AQUÍ per registrar-te!</string>
     <string name="contrasenya_oblidada">Contrasenya oblidada?</string>
     <string name="Registre">Registre</string>
-    <string name="Nom_d_usuari">Nom d'usuari</string>
+    <string name="Nom_d_usuari">Nom d"'"usuari</string>
     <string name="Confirma_Contrasenya">Confirma Contrasenya</string>
     <string name="Registrar_se">Registrar-se</string>
     <string name="compteExistent">Ja tens compte?</string>
@@ -26,7 +26,7 @@
     <string-array name="alineacions">
         <item>4-3-3</item>
         <item>4-4-2</item>
-        <item>4-2-3-1</item>
+        <item>4-5-1</item>
         <item>3-5-2</item>
         <item>3-4-3</item>
         <item>5-3-2</item>
