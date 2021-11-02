@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAlignment="center" />
 
         <TextView
@@ -25,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAlignment="center" />
 
     </LinearLayout>
@@ -40,6 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="createDialog"
             app:srcCompat="@drawable/icon_player1_modif" />
 
         <ImageView
@@ -47,6 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="createDialog"
             app:srcCompat="@drawable/icon_player1_modif" />
 
     </LinearLayout>
@@ -66,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="asdnajsndajsndas"
             android:textAlignment="center" />
 
         <TextView
@@ -74,7 +75,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="sdnflsdfsdfsf"
             android:textAlignment="center" />
 
         <TextView
@@ -82,7 +82,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="as"
             android:textAlignment="center" />
 
         <TextView
@@ -90,7 +89,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="as"
             android:textAlignment="center" />
 
         <TextView
@@ -98,7 +96,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="as"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -159,7 +156,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAlignment="center" />
 
         <TextView
@@ -167,7 +163,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAlignment="center" />
 
         <TextView
@@ -175,7 +170,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -223,7 +217,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView"
             android:textAlignment="center" />
     </LinearLayout>
 
