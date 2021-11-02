@@ -12,26 +12,155 @@
         android:orientation="horizontal">
 
 
-        <TextView
-            android:id="@+id/tv_atacante1_451"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAlignment="center" />
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_atacante1_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_atacante1_451"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1_modif" />
+        </LinearLayout>
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_atacante1_451"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1_modif" />
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_medio1_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_medio1_451"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1_modif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_medio2_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_medio2_451"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_medio3_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_medio3_451"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_medio4_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_medio4_451"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1_modif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_medio5_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_medio5_451"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1_modif" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -45,156 +174,98 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_medio1_451"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAlignment="center" />
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_medio2_451"
+            <TextView
+                android:id="@+id/tv_defensa1_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_defensa1_451"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1_modif" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAlignment="center" />
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_medio3_451"
+            <TextView
+                android:id="@+id/tv_defensa2_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_defensa2_451"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAlignment="center" />
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_medio4_451"
+            <TextView
+                android:id="@+id/tv_defensa3_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_defensa3_451"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAlignment="center" />
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_medio5_451"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_defensa4_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_defensa4_451"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1" />
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_medio1_451"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1_modif" />
-
-        <ImageView
-            android:id="@+id/iv_medio2_451"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1" />
-
-        <ImageView
-            android:id="@+id/iv_medio3_451"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1" />
-
-        <ImageView
-            android:id="@+id/iv_medio4_451"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1_modif" />
-
-        <ImageView
-            android:id="@+id/iv_medio5_451"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1_modif" />
-    </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="70dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_defensa1_451"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/tv_defensa2_451"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/tv_defensa3_451"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/tv_defensa4_451"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/iv_defensa1_451"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1_modif" />
-
-        <ImageView
-            android:id="@+id/iv_defensa2_451"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1" />
-
-        <ImageView
-            android:id="@+id/iv_defensa3_451"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1" />
-
-        <ImageView
-            android:id="@+id/iv_defensa4_451"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1" />
     </LinearLayout>
 
     <Space
@@ -204,29 +275,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_portero_451"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_portero_451"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/icon_player1_modif" />
+            android:clickable="true"
+            android:onClick="createDialog"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_portero_451"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/iv_portero_451"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_player1_modif" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <Space

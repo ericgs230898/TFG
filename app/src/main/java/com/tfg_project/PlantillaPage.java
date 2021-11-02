@@ -5,20 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class PlantillaPage extends AppCompatActivity {
 
@@ -63,7 +58,7 @@ public class PlantillaPage extends AppCompatActivity {
                     inflateLayout(R.layout.linear_layout_451);
                 } else if ( text.equals("3-4-3") ){
                     linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_343_2);
+                    inflateLayout(R.layout.linear_layout_343);
                 } else if ( text.equals("3-5-2") ){
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_352);
@@ -87,24 +82,6 @@ public class PlantillaPage extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View myView = inflater.inflate(layout, null);
         linearLayoutAlineacio.addView(myView);
-        /*LinearLayout llAux = (LinearLayout) linearLayoutAlineacio.getChildAt(0);
-        for ( int i=0; i<llAux.getChildCount(); i++ ) {
-            if ( i==1 || i==4 || i==7 || i==10 ) {
-                LinearLayout llAux2 = (LinearLayout) llAux.getChildAt(i);
-                LinearLayout llAux3 = (LinearLayout) llAux.getChildAt(i-1);
-                for ( int j=0; j<llAux2.getChildCount(); j++ ) {
-                    ImageView imageView = (ImageView) llAux2.getChildAt(j);
-                    imageView.setClickable(true);
-                    TextView textView = (TextView) llAux3.getChildAt(i);
-                    /*imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            //createDialog(textView);
-                        }
-                    });
-                }
-            }
-        }*/
     }
 
     public void createDialog (View view){
