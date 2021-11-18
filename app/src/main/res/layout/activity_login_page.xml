@@ -50,7 +50,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/etLoginMail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -77,7 +77,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/etLoginPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -87,32 +87,34 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bLoginIniciaSesio"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:background="#020202"
+        android:background="#FFFFFF"
         android:text="@string/inicia_sessió"
+        android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvRegisterNoAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:clickable="true"
         android:text="@string/sense_compte"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/bLoginIniciaSesio" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/contrasenya_oblidada"
@@ -120,5 +122,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterNoAccount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

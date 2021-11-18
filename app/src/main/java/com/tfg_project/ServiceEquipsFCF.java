@@ -3,6 +3,13 @@ package com.tfg_project;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,14 +17,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceEquipsFCF {
 
     protected static final List<String> competicions = Arrays.asList("quarta-catalana", "tercera-catalana", "segona-catalana", "primera-catalana");
     protected static final List<String> grups = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30");
-
-    private List<Equip> listEquips = new ArrayList<>();
 
     public void getEquipsParticipants() {
         List<Thread> threads = new ArrayList<>();
@@ -25,6 +32,8 @@ public class ServiceEquipsFCF {
             for (int j = 0; j< grups.size(); j++) {
                 String link = "https://www.fcf.cat/classificacio/2022/futbol-11/" + competicions.get(i) + "/grup-" + grups.get(j);
                 String link2 = "<td class=\"tl resumida\"><a href=\"https://www.fcf.cat/calendari-equip/2022/futbol-11/";
+                int finalI = i;
+                int finalJ = j;
                 Thread thread = new Thread(() -> {
                     URL url = null;
                     try {
@@ -53,12 +62,31 @@ public class ServiceEquipsFCF {
                                 e.printStackTrace();
                             }
                         }
+                        List<Equip> listEquips = new ArrayList<>();
                         int aux = text.toString().indexOf(link2);
                         while (aux != -1 ){
                             listEquips.add(getNomEquip(text.toString(), aux + 33));
                             aux = text.toString().indexOf(link2, aux+33);
                         }
+                        if (!listEquips.isEmpty()) {
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            Map<String, String> equips = new HashMap<>();
+                            for (Equip equip : listEquips) {
+                                equips.put(equip.getNomEquip(), equip.getLinkEquip());
+                            }
 
+                            db.collection("Equips").document(competicions.get(finalI) + grups.get(finalJ)).set(equips).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Log.d("DB", "DocumentSnapshot successfully written!");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("DB", "Error writing document", e);
+                                }
+                            });
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -114,13 +142,5 @@ public class ServiceEquipsFCF {
             }
         }
         return new Equip(equip.toString(), equipLink.toString());
-    }
-
-    public List<Equip> getListEquips() {
-        return listEquips;
-    }
-
-    public void setListEquips(List<Equip> listEquips) {
-        this.listEquips = listEquips;
     }
 }

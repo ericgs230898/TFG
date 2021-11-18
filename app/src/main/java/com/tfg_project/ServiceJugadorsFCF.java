@@ -3,23 +3,31 @@ package com.tfg_project;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceJugadorsFCF {
-
-    private List<Jugador> jugadors = new ArrayList<>();
-
-    public List<Jugador> getJugadorsEquip(List<Equip> listEquips) {
+    public void getJugadorsEquip(List<Equip> listEquips, String grupCat) {
         for ( int i=0; i<listEquips.size(); i++ ) {
-            String linkEquip = listEquips.get(i).getLinkEquip();
-            String nomEquip = listEquips.get(i).getNomEquip();
+            int finalI = i;
             Thread thread = new Thread(() -> {
+                List<Jugador> jugadors = new ArrayList<>();
+                String linkEquip = listEquips.get(finalI).getLinkEquip();
+                String nomEquip = listEquips.get(finalI).getNomEquip();
                 URL url = null;
                 try {
                     try {
@@ -63,6 +71,21 @@ public class ServiceJugadorsFCF {
                             jugador = new StringBuilder();
                         }
                     }
+                    if (!jugadors.isEmpty()){
+                        Map<String, Object> docData = new HashMap<>();
+                        List<String> jugadores = new ArrayList<>();
+                        for (Jugador jug : jugadors ) {
+                            jugadores.add(jug.getNomJugador());
+                        }
+                        docData.put("Jugadors", jugadores);
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        db.collection("Jugadors").document(grupCat).collection(nomEquip).document("Jugadors").set(docData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("DB", "DB-Complete");
+                            }
+                        });
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -71,19 +94,11 @@ public class ServiceJugadorsFCF {
             thread.start();
             try {
                 thread.join();
-                Log.e("SIZE", String.valueOf(jugadors.size()));
+                //Log.e("SIZE", String.valueOf(jugadors.size()));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        return jugadors;
-    }
-
-    public List<Jugador> getJugadors() {
-        return jugadors;
-    }
-
-    public void setJugadors(List<Jugador> jugadors) {
-        this.jugadors = jugadors;
+        //return jugadors;
     }
 }

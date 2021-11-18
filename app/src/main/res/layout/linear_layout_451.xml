@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:lines="3"
                 android:textAlignment="center" />
 
             <ImageView
@@ -39,7 +40,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="70dp" />
+        android:layout_height="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:lines="3"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/iv_medio1_451"
@@ -83,7 +86,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:lines="3"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/iv_medio2_451"
@@ -106,7 +111,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:lines="3"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/iv_medio3_451"
@@ -129,7 +136,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:lines="3"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/iv_medio4_451"
@@ -152,7 +161,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:lines="3"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/iv_medio5_451"
@@ -166,7 +177,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="70dp" />
+        android:layout_height="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -187,6 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:lines="3"
                 android:textAlignment="center" />
 
             <ImageView
@@ -210,6 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:lines="3"
                 android:textAlignment="center" />
 
             <ImageView
@@ -233,6 +246,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:lines="3"
                 android:textAlignment="center" />
 
             <ImageView
@@ -256,6 +270,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:lines="3"
                 android:textAlignment="center" />
 
             <ImageView
@@ -270,7 +285,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="70dp" />
+        android:layout_height="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -291,6 +306,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:lines="3"
                 android:textAlignment="center" />
 
             <ImageView
@@ -305,5 +321,5 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="70dp" />
+        android:layout_height="30dp" />
 </LinearLayout>
