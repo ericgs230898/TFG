@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#409143"
-    tools:context=".PlantillaPage">
+    tools:context=".activity.PlantillaPage">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerAlineacions">
+        app:layout_constraintTop_toBottomOf="@+id/bGuardarPlantilla">
 
         <LinearLayout
             android:id="@+id/ll_atacantes"
@@ -80,5 +80,35 @@
             android:layout_weight="25"
             android:orientation="horizontal" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ibBackButtonPlantilla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <Button
+        android:id="@+id/bGuardarPlantilla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Guardar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+
+    <Spinner
+        android:id="@+id/spinnerJornadesPlantilla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerAlineacions"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toEndOf="@+id/bGuardarPlantilla"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

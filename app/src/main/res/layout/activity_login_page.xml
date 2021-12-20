@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7BD6FF"
-    tools:context=".LoginPage">
+    tools:context=".activity.LoginPage">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -104,7 +104,9 @@
         android:id="@+id/tvRegisterNoAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:clickable="true"
         android:text="@string/sense_compte"
         android:textColor="#000000"
@@ -114,9 +116,10 @@
         app:layout_constraintTop_toBottomOf="@+id/bLoginIniciaSesio" />
 
     <TextView
-        android:id="@+id/tvHaveAccount"
+        android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:text="@string/contrasenya_oblidada"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"

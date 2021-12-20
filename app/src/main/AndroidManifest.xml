@@ -8,16 +8,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".PerfilPage"></activity>
-        <activity android:name=".PlantillaPage"></activity>
-        <activity android:name=".MenuPrincipal">
-
-        </activity>
-        <activity android:name=".RegisterPage" />
-        <activity android:name=".LoginPage">
+        <activity android:name=".activity.AdminPage"></activity>
+        <activity android:name=".activity.Puntuacions"></activity>
+        <activity android:name=".activity.ResultatsPartitPage" />
+        <activity android:name=".activity.ResultatsPage" />
+        <activity android:name=".activity.MenuLligaVirtual" />
+        <activity android:name=".activity.PerfilPage" />
+        <activity android:name=".activity.PlantillaPage" />
+        <activity android:name=".activity.MenuPrincipal" />
+        <activity android:name=".activity.RegisterPage" />
+        <activity android:name=".activity.LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

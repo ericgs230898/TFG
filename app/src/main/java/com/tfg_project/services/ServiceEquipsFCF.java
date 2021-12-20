@@ -1,14 +1,18 @@
-package com.tfg_project;
+package com.tfg_project.services;
 
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.tfg_project.clases.Equip;
+import com.tfg_project.clases.Jugador;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,8 +27,8 @@ import java.util.Map;
 
 public class ServiceEquipsFCF {
 
-    protected static final List<String> competicions = Arrays.asList("quarta-catalana", "tercera-catalana", "segona-catalana", "primera-catalana");
-    protected static final List<String> grups = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30");
+    protected static final List<String> competicions = Arrays.asList("quarta-catalana");//, "tercera-catalana", "segona-catalana", "primera-catalana");
+    protected static final List<String> grups = Arrays.asList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11", "13", "14", "15", "16", "17", "20", "21", "23", "24", "27", "28", "29", "30");
 
     public void getEquipsParticipants() {
         List<Thread> threads = new ArrayList<>();
@@ -74,8 +78,29 @@ public class ServiceEquipsFCF {
                             for (Equip equip : listEquips) {
                                 equips.put(equip.getNomEquip(), equip.getLinkEquip());
                             }
+                            for ( Equip equip : listEquips ) {
+                                ServiceJugadorsFCF serviceJugadorsFCF = new ServiceJugadorsFCF();
+                                List<Jugador> jugadors = serviceJugadorsFCF.getJugadorsEquip(equip);
+                                ArrayList<String> jugString = new ArrayList<>();
+                                for ( Jugador jugador : jugadors ) {
+                                    jugString.add(jugador.getNomJugador());
+                                }
+                                Map<String, Object> mapEquip = new HashMap<>();
+                                mapEquip.put("acta", equip.getLinkEquip());
+                                mapEquip.put("jugadors", jugString);
 
-                            db.collection("Equips").document(competicions.get(finalI) + grups.get(finalJ)).set(equips).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                DocumentReference documentReference = db.collection("Equip")
+                                        .document(competicions.get(finalI))
+                                        .collection("Grups")
+                                        .document("grup"+grups.get(finalJ))
+                                        .collection("Equips").document(equip.getNomEquip());
+
+                                documentReference.set(mapEquip).addOnCompleteListener(task -> {
+                                    System.out.println("FINISH");
+                                        });
+
+                            }
+                            /*db.collection("Equips").document(competicions.get(finalI) + grups.get(finalJ)).set(equips).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Log.d("DB", "DocumentSnapshot successfully written!");
@@ -85,7 +110,7 @@ public class ServiceEquipsFCF {
                                 public void onFailure(@NonNull Exception e) {
                                     Log.w("DB", "Error writing document", e);
                                 }
-                            });
+                            });*/
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

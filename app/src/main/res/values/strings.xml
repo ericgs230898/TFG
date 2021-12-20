@@ -26,7 +26,11 @@
     <string name="maxPartipants">Número Màxim Participants: </string>
     <string name="competicio2">Competició: </string>
     <string name="grup2">Grup: </string>
+    <string name="classificacio">CLASSIFICACIÓ</string>
+    <string name="resultats">Resultats</string>
 
+    <string name="semanal">Setmanal</string>
+    <string name="global">Global</string>
 
 
     <string-array name="maxNumParticipants">

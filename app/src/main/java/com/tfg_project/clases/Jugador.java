@@ -1,4 +1,4 @@
-package com.tfg_project;
+package com.tfg_project.clases;
 
 public class Jugador {
     String nomJugador;

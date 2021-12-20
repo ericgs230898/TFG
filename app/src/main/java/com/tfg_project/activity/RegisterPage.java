@@ -1,26 +1,24 @@
-package com.tfg_project;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.tfg_project.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.tfg_project.R;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -51,11 +49,13 @@ public class RegisterPage extends AppCompatActivity {
                                 task.getResult().getUser().sendEmailVerification().addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()){
                                         Log.d("RGSR", "Email sent");
+                                        makeToast("S'ha enviat un mail per confirmar la teva compte!");
                                         registerUserInDataBase();
                                     }
                                 });
                                 Log.d("RGSR","Register Successful");
                                 goToLoginPage();
+                                finish();
                             }
                             else {
                                 Log.w("RGSR", "CreateUserWithEmail:failure",task.getException());
@@ -70,8 +70,11 @@ public class RegisterPage extends AppCompatActivity {
         String mail = etMail.getText().toString();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String,String> userMap = new HashMap<>();
-        userMap.put(usuari, mail);
-        db.collection("Usuari").document().set(userMap).addOnCompleteListener(task -> Log.d("TAG", "completeInsertUsuari"));
+        userMap.put("usuari", usuari);
+        db.collection("Usuari").document(mail).set(userMap).addOnCompleteListener(task -> Log.d("TAG", "completeInsertUsuari"));
+        Map<String, List> mapList = new HashMap<>();
+        mapList.put("Lligues", Arrays.asList());
+        db.collection("UsuariLligaVirtual").document(mail).set(mapList).addOnCompleteListener(task -> Log.d("TAG", "completeInsertUserLligaVirtual"));
     }
 
     private void initializeVariables(){
