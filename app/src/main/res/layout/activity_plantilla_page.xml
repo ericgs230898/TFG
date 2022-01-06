@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#409143"
-    tools:context=".activity.PlantillaPage">
+    tools:context=".controlador.PlantillaPage">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -22,7 +22,7 @@
         android:id="@+id/spinnerAlineacions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
@@ -44,7 +44,7 @@
         android:id="@+id/ll_alineacio"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
         android:weightSum="100"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,7 +96,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/customborder8"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
         android:text="Guardar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
@@ -105,10 +110,20 @@
         android:id="@+id/spinnerJornadesPlantilla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/spinnerAlineacions"
         app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toEndOf="@+id/bGuardarPlantilla"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+
+    <TextView
+        android:id="@+id/tvDataMinJornada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerAlineacions"
+        app:layout_constraintStart_toEndOf="@+id/bGuardarPlantilla"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerJornadesPlantilla" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

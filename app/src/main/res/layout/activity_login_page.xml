@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7BD6FF"
-    tools:context=".activity.LoginPage">
+    tools:context=".controlador.LoginPage">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -45,6 +45,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/email"
             android:textColor="#000000"
             android:textSize="16sp" />
@@ -53,7 +54,7 @@
             android:id="@+id/etLoginMail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="15"
             android:inputType="textEmailAddress"
             android:textSize="16sp" />
     </LinearLayout>
@@ -72,6 +73,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/contrasenya"
             android:textColor="#000000"
             android:textSize="16sp" />
@@ -80,7 +82,7 @@
             android:id="@+id/etLoginPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="15"
             android:inputType="textPassword"
             android:textSize="16sp" />
 
@@ -92,7 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/rounded_button"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
         android:text="@string/inicia_sessió"
         android:textColor="#000000"
         android:textSize="14sp"
@@ -108,7 +114,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:clickable="true"
-        android:text="@string/sense_compte"
+        android:text="@string/not_have_account"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +127,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:text="@string/contrasenya_oblidada"
+        android:text="@string/contrasenya_oblidada2"
+        android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

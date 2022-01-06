@@ -5,8 +5,7 @@
     <string name="email">Adreça electrònica</string>
     <string name="contrasenya">Contrasenya</string>
     <string name="inicia_sessió">Inicia sessió</string>
-    <string name="sense_compte">No tens un compte encara?<br />Fes click AQUÍ per registrar-te!</string>
-    <string name="contrasenya_oblidada">Contrasenya oblidada?</string>
+    <string name="sense_compte">No tens un compte encara? Fes click AQUÍ per registrar-te!</string>
     <string name="Registre">Registre</string>
     <string name="Nom_d_usuari">Nom d"'"usuari</string>
     <string name="Confirma_Contrasenya">Confirma Contrasenya</string>
@@ -23,7 +22,7 @@
     <string name="plantilla">Plantilla</string>
 
     <string name="nomLligaVirtual">Nom Lliga Virtual</string>
-    <string name="maxPartipants">Número Màxim Participants: </string>
+    <string name="maxPartipants">Número Màxim Participants:  </string>
     <string name="competicio2">Competició: </string>
     <string name="grup2">Grup: </string>
     <string name="classificacio">CLASSIFICACIÓ</string>
@@ -136,4 +135,39 @@
         <item>5-3-2</item>
         <item>5-4-1</item>
     </string-array>
+
+
+    <!--AdminPage-->
+    <string name="bolcant_nous_partits">Bolcant els partits nous</string>
+    <string name="bolcant_nous_jugadors">Bolcant els jugadors dels partits nous</string>
+    <string name="bolcant_puntuacions_jornades">Bolcant les puntuacions de les jornades</string>
+    <string name="bolcant_puntuacions_plantilles">Bolcant les puntuacions de les plantilles</string>
+
+    <!--LoginPage-->
+    <string name="email_not_verified">Encara no s\'ha verificat l\'adreça electrònica</string>
+    <string name="authentication_failed">L\'usuari i contrasenya especificats no corresponen a cap usuari de l\'aplicació</string>
+    <string name="forgot_password">Contrasenya oblidada?</string>
+    <string name="recuperar_password">Vols recuperar la teva contrasenya? <br/>S\'enviarà un mail al correu electrònic introduit.</string>
+    <string name="mail_send">S\'ha enviat un correu electrònic a l\'adreça electrònica per tal de recuperar la contrasenya.</string>
+    <string name="mail_incorrect">L\'adreça electrònica no té un format vlid.</string>
+    <string name="not_have_account">No tens un compte encara? <br/>Fes click AQUÍ per registrar-te!</string>
+    <string name="recuperar_password2">No recordes la teva contrasenya?<br/>Fes click AQUÍ per recuperar-la.</string>
+    <string name="contrasenya_oblidada2">No recordes la teva contrasenya? <br/>Fes click AQUÍ!</string>
+
+    <!--ResultatsPartitPage-->
+    <string name="gols_marcats">Gols</string>
+    <string name="minuts_jugats">Minuts jugats</string>
+    <string name="gols_penal">Gols de penal</string>
+    <string name="gols_propia">Gols en pròpia</string>
+    <string name="gols_rebuts">Gols rebuts</string>
+    <string name="targetes_grogues">Targetes grogues</string>
+    <string name="targetes_vermelles">Targetes vermelles</string>
+
+    <!--ResultatsPage-->
+    <string name="no_jugat">NJ</string>
+    <string name="descansa">Descansa</string>
+
+
+
+
 </resources>

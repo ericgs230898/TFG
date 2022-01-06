@@ -2,22 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
+    android:background="@drawable/customborder6"
     android:orientation="horizontal"
     android:weightSum="100">
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="7" />
 
     <TextView
         android:id="@+id/tvEquipLocal"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="35"
+        android:layout_weight="43"
         android:gravity="center|center_horizontal|center_vertical"
+        android:paddingRight="5dp"
         android:textAlignment="center"
         android:textColor="#000000" />
 
@@ -26,22 +21,20 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="16"
+        android:background="@drawable/customborder7"
         android:gravity="center|center_horizontal|center_vertical"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvEquipVisitante"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="35"
+        android:layout_weight="43"
+        android:paddingLeft="5dp"
         android:textAlignment="center"
         android:textColor="#000000" />
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="7" />
 
 </LinearLayout>

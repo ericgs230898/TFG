@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7BD6FF"
-    tools:context=".activity.Puntuacions">
+    tools:context=".controlador.Puntuacions">
 
   <androidx.appcompat.widget.Toolbar
       android:id="@+id/toolbar2"
@@ -23,7 +23,7 @@
       android:id="@+id/textView16"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="PUNTUACIONS"
+      android:text="Puntuacions"
       android:textColor="#000000"
       android:textSize="24sp"
       android:textStyle="bold"
@@ -47,7 +47,7 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
+      android:layout_marginTop="8dp"
       android:layout_marginEnd="16dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -74,9 +74,14 @@
           android:layout_weight="1" />
 
       <Button
-          android:id="@+id/button2"
+          android:id="@+id/bPuntuacionsJoc"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:background="@drawable/rounded_button"
+          android:paddingLeft="10dp"
+          android:paddingTop="2dp"
+          android:paddingRight="10dp"
+          android:paddingBottom="2dp"
           android:text="puntuacions del joc" />
 
       <Space

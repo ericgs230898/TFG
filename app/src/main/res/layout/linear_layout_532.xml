@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:lines="3"
+                android:textColor="#000000"
                 android:textAlignment="center" />
 
             <ImageView
@@ -49,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#000000"
                 android:lines="3"
                 android:textAlignment="center" />
 
@@ -83,6 +85,7 @@
             <TextView
                 android:id="@+id/tv_medio1_532"
                 android:layout_width="match_parent"
+                android:textColor="#000000"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:lines="3"
@@ -108,6 +111,7 @@
                 android:id="@+id/tv_medio2_532"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:layout_weight="1"
                 android:lines="3"
                 android:textAlignment="center" />
@@ -134,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:lines="3"
+                android:textColor="#000000"
                 android:textAlignment="center" />
 
             <ImageView
@@ -168,6 +173,7 @@
                 android:id="@+id/tv_defensa1_532"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:layout_weight="1"
                 android:lines="3"
                 android:textAlignment="center"
@@ -194,6 +200,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#000000"
                 android:lines="3"
                 android:textAlignment="center"
                 android:textSize="12sp" />
@@ -220,6 +227,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:lines="3"
+                android:textColor="#000000"
                 android:textAlignment="center"
                 android:textSize="12sp" />
 
@@ -244,6 +252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#000000"
                 android:lines="3"
                 android:textAlignment="center"
                 android:textSize="12sp" />
@@ -271,6 +280,7 @@
                 android:layout_weight="1"
                 android:lines="3"
                 android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="12sp" />
 
             <ImageView
@@ -306,6 +316,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#000000"
                 android:lines="3"
                 android:textAlignment="center" />
 
