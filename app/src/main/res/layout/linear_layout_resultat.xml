@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/customborder6"
+    android:orientation="horizontal"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/tvEquipLocal"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="43"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:paddingRight="5dp"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/tvResultats"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="16"
+        android:background="@drawable/customborder7"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvEquipVisitante"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="43"
+        android:paddingLeft="5dp"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+</LinearLayout>

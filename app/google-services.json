@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "499820970658",
+    "project_id": "tfg-fib-project",
+    "storage_bucket": "tfg-fib-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499820970658:android:4adfa68272bcc941e98dfb",
+        "android_client_info": {
+          "package_name": "com.tfg_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499820970658-2020h7f07l87k4erplfcrm20mn104o2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdJqvooFmzziwe9rW7KX-pUq-U0a2DmE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499820970658-2020h7f07l87k4erplfcrm20mn104o2b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

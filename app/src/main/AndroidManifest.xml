@@ -2,20 +2,42 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tfg_project">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TFG_Project">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".controlador.AdminPage"></activity>
+        <activity android:name=".controlador.Puntuacions"></activity>
+        <activity android:name=".controlador.ResultatsPartitPage" />
+        <activity android:name=".controlador.ResultatsPage" />
+        <activity android:name=".controlador.MenuLligaVirtual" />
+        <activity android:name=".controlador.PerfilPage" />
+        <activity android:name=".controlador.PlantillaPage" />
+        <activity android:name=".controlador.MenuPrincipal" />
+        <activity android:name=".controlador.RegisterPage" />
+        <activity android:name=".controlador.LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".model.services.ServiceNotificacions"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
+
+
 
 </manifest>
