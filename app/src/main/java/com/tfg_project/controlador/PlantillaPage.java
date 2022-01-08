@@ -1,6 +1,7 @@
 package com.tfg_project.controlador;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +21,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.tfg_project.R;
 import com.tfg_project.model.beans.JornadaData;
@@ -40,21 +40,22 @@ import java.util.Map;
 import java.util.Set;
 
 public class PlantillaPage extends AppCompatActivity {
-
-    private static final String TAG = "PLANTILLA_PAGE_TAG";
+    private static final String ALINEACIO_433 = "4-3-3";
+    private static final String ALINEACIO_442 = "4-4-2";
+    private static final String ALINEACIO_451 = "4-5-1";
+    private static final String ALINEACIO_343 = "3-4-3";
+    private static final String ALINEACIO_352 = "3-5-2";
+    private static final String ALINEACIO_541 = "5-4-1";
+    private static final String ALINEACIO_532 = "5-3-2";
 
     private Spinner spinnerAlineacions;
     private LinearLayout linearLayoutAlineacio;
 
-    private List<String> jugadors;
     private List<Jugador> jugadorsEquip;
     private List<String> equips;
 
-    private ArrayAdapter<String> adp;
-    private ArrayAdapter<String> adapterEquips;
     private ArrayAdapter<String> adapterJugadors;
     private String nomLligaVirtual;
-    private String mailUser;
     private Spinner jugadorsPossibles;
     private AlertDialog dialog;
     private Spinner spinnerJornadesPossibles;
@@ -69,10 +70,9 @@ public class PlantillaPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plantilla_page);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         initializeVariables();
-
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         backButton.setOnClickListener(view -> finish());
 
@@ -86,7 +86,7 @@ public class PlantillaPage extends AppCompatActivity {
         Task<QuerySnapshot> task1 = firebaseOperationsPlantillaPage.getJornadesPossibles(competicio, grup);
         Tasks.whenAllComplete(task1).addOnCompleteListener(task -> {
             jornadesData = firebaseOperationsPlantillaPage.getJornadesData();
-            final ArrayAdapter<String> adapterJornades = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, firebaseOperationsPlantillaPage.getJornades());
+            final ArrayAdapter<String> adapterJornades = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, firebaseOperationsPlantillaPage.getJornades());
             spinnerJornadesPossibles.setAdapter(adapterJornades);
             int index = getJornadaMesPropera();
             tvDataMinJornada.setText("INICI: " + jornadesData.get(index).getDataMin() + " - FI: " + jornadesData.get(index).getDataMax());
@@ -130,7 +130,9 @@ public class PlantillaPage extends AppCompatActivity {
                             int indexAlineacio = getIndexAlineacio(alineacio);
                             spinnerAlineacions.setSelection(indexAlineacio);
                             if (jugadorsBD.size() < 11) {
-                                for (int i1 = 0; jugadors.size() < 11; i1++) {
+                                int iAux=0;
+                                while (iAux < 11){
+                                    iAux++;
                                     jugadorsBD.add("");
                                 }
                             }
@@ -141,7 +143,7 @@ public class PlantillaPage extends AppCompatActivity {
                     } else {
                         linearLayoutAlineacio.removeAllViews();
                         spinnerAlineacions.setSelection(0);
-                        inflateLayout(getLayoutValue("4-3-3"));
+                        inflateLayout(getLayoutValue(ALINEACIO_433));
                         updatePlantilla(new ArrayList<>());
                     }
                 });
@@ -149,13 +151,12 @@ public class PlantillaPage extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                // non implemented
             }
         });
         Task<QuerySnapshot> task3 = firebaseOperationsPlantillaPage.getJugadorsCompeticioGrup(competicio, grup);
         Tasks.whenAllComplete(task3).addOnCompleteListener(task -> {
             equips = firebaseOperationsPlantillaPage.getEquips();
-            jugadors = firebaseOperationsPlantillaPage.getJugadors();
             jugadorsEquip = firebaseOperationsPlantillaPage.getJugadorsEquip();
         });
 
@@ -201,7 +202,6 @@ public class PlantillaPage extends AppCompatActivity {
                 }
                 Set<String> set = new HashSet<>();
                 for (JugadorPosicio nomJ : jugadorGuardar) {
-                    System.out.println(nomJ.getNomJugador());
                     set.add(nomJ.getNomJugador());
                 }
                 if (set.size() != jugadorGuardar.size()) utilsProject.makeToast("Hi ha algun jugador duplicat!" );
@@ -213,7 +213,7 @@ public class PlantillaPage extends AppCompatActivity {
                     for (JugadorPosicio jugadorPosicio : jugadorGuardar) {
                         mapJugadors.put(jugadorPosicio.getNomJugador(), jugadorPosicio.getPosicio());
                     }
-                    mapJugadors.put("alineacio", (String) spinnerAlineacions.getSelectedItem());
+                    mapJugadors.put("alineacio", spinnerAlineacions.getSelectedItem());
                     mapJugadors.put("puntuat", false);
                     mapJugadors.put("puntuat2", false);
                     Map<String, Object> mapAux = new HashMap<>();
@@ -230,37 +230,37 @@ public class PlantillaPage extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String text = spinnerAlineacions.getSelectedItem().toString();
                 Log.i("INFO", text);
-                if ( text.equals("4-3-3")){
+                if ( text.equals(ALINEACIO_433)){
                     List<String> jugadorsSelect = getJugadorsFromLinearLayout();
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_433);
                     updatePlantilla(jugadorsSelect);
-                } else if ( text.equals("4-4-2") ){
+                } else if ( text.equals(ALINEACIO_442) ){
                     List<String> jugadorsSelect = getJugadorsFromLinearLayout();
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_442);
                     updatePlantilla(jugadorsSelect);
-                } else if ( text.equals("4-5-1") ){
+                } else if ( text.equals(ALINEACIO_451) ){
                     List<String> jugadorsSelect = getJugadorsFromLinearLayout();
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_451);
                     updatePlantilla(jugadorsSelect);
-                } else if ( text.equals("3-4-3") ){
+                } else if ( text.equals(ALINEACIO_343) ){
                     List<String> jugadorsSelect = getJugadorsFromLinearLayout();
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_343);
                     updatePlantilla(jugadorsSelect);
-                } else if ( text.equals("3-5-2") ){
+                } else if ( text.equals(ALINEACIO_352) ){
                     List<String> jugadorsSelect = getJugadorsFromLinearLayout();
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_352);
                     updatePlantilla(jugadorsSelect);
-                } else if ( text.equals("5-4-1") ){
+                } else if ( text.equals(ALINEACIO_541) ){
                     List<String> jugadorsSelect = getJugadorsFromLinearLayout();
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_541);
                     updatePlantilla(jugadorsSelect);
-                } else if ( text.equals("5-3-2") ){
+                } else if ( text.equals(ALINEACIO_532) ){
                     List<String> jugadorsSelect = getJugadorsFromLinearLayout();
                     linearLayoutAlineacio.removeAllViews();
                     inflateLayout(R.layout.linear_layout_532);
@@ -270,7 +270,7 @@ public class PlantillaPage extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                // non implemented
             }
         });
     }
@@ -278,7 +278,6 @@ public class PlantillaPage extends AppCompatActivity {
     private void initializeVariables() {
         backButton = findViewById(R.id.ibBackButtonPlantilla);
         jornadesData = new ArrayList<>();
-        mailUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         context = this;
         utilsProject = new UtilsProject(context);
         spinnerJornadesPossibles = findViewById(R.id.spinnerJornadesPlantilla);
@@ -289,19 +288,19 @@ public class PlantillaPage extends AppCompatActivity {
     }
 
     private int getLayoutValue(String alineacio) {
-        if (alineacio.equals("4-3-3")){
+        if (alineacio.equals(ALINEACIO_433)){
             return R.layout.linear_layout_433;
-        } else if ( alineacio.equals("4-4-2")){
+        } else if ( alineacio.equals(ALINEACIO_442)){
             return R.layout.linear_layout_442;
-        } else if ( alineacio.equals("4-5-1")){
+        } else if ( alineacio.equals(ALINEACIO_451)){
             return R.layout.linear_layout_451;
-        } else if ( alineacio.equals("3-5-2")){
+        } else if ( alineacio.equals(ALINEACIO_352)){
             return R.layout.linear_layout_352;
-        } else if ( alineacio.equals("3-4-3")){
+        } else if ( alineacio.equals(ALINEACIO_343)){
             return R.layout.linear_layout_343;
-        } else if ( alineacio.equals("5-3-2")){
+        } else if ( alineacio.equals(ALINEACIO_532)){
             return R.layout.linear_layout_532;
-        } else if ( alineacio.equals("5-4-1")){
+        } else if ( alineacio.equals(ALINEACIO_541)){
             return R.layout.linear_layout_541;
         } else{
             return -1;
@@ -309,19 +308,19 @@ public class PlantillaPage extends AppCompatActivity {
     }
 
     private static int getIndexAlineacio(String alineacio) {
-        if (alineacio.equals("4-3-3")){
+        if (alineacio.equals(ALINEACIO_433)){
             return 0;
-        } else if ( alineacio.equals("4-4-2")){
+        } else if ( alineacio.equals(ALINEACIO_442)){
             return 1;
-        } else if ( alineacio.equals("4-5-1")){
+        } else if ( alineacio.equals(ALINEACIO_451)){
             return 2;
-        } else if ( alineacio.equals("3-5-2")){
+        } else if ( alineacio.equals(ALINEACIO_352)){
             return 3;
-        } else if ( alineacio.equals("3-4-3")){
+        } else if ( alineacio.equals(ALINEACIO_343)){
             return 4;
-        } else if ( alineacio.equals("5-3-2")){
+        } else if ( alineacio.equals(ALINEACIO_532)){
             return 5;
-        } else if ( alineacio.equals("5-4-1")){
+        } else if ( alineacio.equals(ALINEACIO_541)){
             return 6;
         }
         return 1;
@@ -367,16 +366,17 @@ public class PlantillaPage extends AppCompatActivity {
             try {
                 dateJornada = sdf.parse(jornadesData.get(i).getDataMin());
             } catch (ParseException e ){
-
+                // non implemented
             }
-            long diffInMillies = Math.abs(dateJornada.getTime()-dateNow.getTime());
-            if ( min == -1 ) {
-                min = diffInMillies;
-            }
-            else {
-                if ( diffInMillies < min ) {
+            if ( dateJornada != null ) {
+                long diffInMillies = Math.abs(dateJornada.getTime() - dateNow.getTime());
+                if (min == -1) {
                     min = diffInMillies;
-                    minJornada = i;
+                } else {
+                    if (diffInMillies < min) {
+                        min = diffInMillies;
+                        minJornada = i;
+                    }
                 }
             }
         }
@@ -410,32 +410,30 @@ public class PlantillaPage extends AppCompatActivity {
             LinearLayout llMediocampo = ((LinearLayout)((LinearLayout) linearLayoutAlineacio.getChildAt(0)).getChildAt(2));
             LinearLayout llDefensa = ((LinearLayout)((LinearLayout) linearLayoutAlineacio.getChildAt(0)).getChildAt(4));
             LinearLayout llPortero = ((LinearLayout)((LinearLayout) linearLayoutAlineacio.getChildAt(0)).getChildAt(6));
-            if ( llDelanteros != null && llMediocampo!=null && llDefensa!=null && llPortero!=null ) {
-                if ( jugadorsSelect.size() > 0 ) {
-                    for (int i = 0; i < llDelanteros.getChildCount(); i++) {
-                        TextView tv = (TextView) ((LinearLayout) llDelanteros.getChildAt(i)).getChildAt(0);
-                        if ( i<jugadorsSelect.size())tv.setText(jugadorsSelect.get(i));
-                    }
+            if ( llDelanteros != null && llMediocampo!=null && llDefensa!=null && llPortero!=null && !jugadorsSelect.isEmpty() ) {
+                for (int i = 0; i < llDelanteros.getChildCount(); i++) {
+                    TextView tv = (TextView) ((LinearLayout) llDelanteros.getChildAt(i)).getChildAt(0);
+                    if ( i<jugadorsSelect.size())tv.setText(jugadorsSelect.get(i));
+                }
 
-                    for (int i = 0; i < llMediocampo.getChildCount(); i++) {
-                        TextView tv = (TextView) ((LinearLayout) llMediocampo.getChildAt(i)).getChildAt(0);
-                        int indexAux = i + llDelanteros.getChildCount();
-                        if ( indexAux<jugadorsSelect.size()) {
-                            tv.setText(jugadorsSelect.get(indexAux));
-                        }
+                for (int i = 0; i < llMediocampo.getChildCount(); i++) {
+                    TextView tv = (TextView) ((LinearLayout) llMediocampo.getChildAt(i)).getChildAt(0);
+                    int indexAux = i + llDelanteros.getChildCount();
+                    if ( indexAux<jugadorsSelect.size()) {
+                        tv.setText(jugadorsSelect.get(indexAux));
                     }
+                }
 
-                    for (int i = 0; i < llDefensa.getChildCount(); i++) {
-                        TextView tv = (TextView) ((LinearLayout) llDefensa.getChildAt(i)).getChildAt(0);
-                        int indexAux = i + i + llDelanteros.getChildCount() + llMediocampo.getChildCount();
-                        if ( indexAux<jugadorsSelect.size()) {
-                            tv.setText(jugadorsSelect.get(indexAux));
-                        }
+                for (int i = 0; i < llDefensa.getChildCount(); i++) {
+                    TextView tv = (TextView) ((LinearLayout) llDefensa.getChildAt(i)).getChildAt(0);
+                    int indexAux = i + i + llDelanteros.getChildCount() + llMediocampo.getChildCount();
+                    if ( indexAux<jugadorsSelect.size()) {
+                        tv.setText(jugadorsSelect.get(indexAux));
                     }
-                    TextView tv = (TextView) ((LinearLayout) llPortero.getChildAt(0)).getChildAt(0);
-                    if ( (llDelanteros.getChildCount() + llMediocampo.getChildCount() + llDefensa.getChildCount()) < jugadorsSelect.size()) {
-                        tv.setText(jugadorsSelect.get(llDelanteros.getChildCount() + llMediocampo.getChildCount() + llDefensa.getChildCount()));
-                    }
+                }
+                TextView tv = (TextView) ((LinearLayout) llPortero.getChildAt(0)).getChildAt(0);
+                if ( (llDelanteros.getChildCount() + llMediocampo.getChildCount() + llDefensa.getChildCount()) < jugadorsSelect.size()) {
+                    tv.setText(jugadorsSelect.get(llDelanteros.getChildCount() + llMediocampo.getChildCount() + llDefensa.getChildCount()));
                 }
             }
         }
@@ -458,7 +456,7 @@ public class PlantillaPage extends AppCompatActivity {
         Spinner equipsPossibles = alertDialogView.findViewById(R.id.spinnerEquipsPossibles);
         jugadorsPossibles = alertDialogView.findViewById(R.id.spinnerJugadorsPossibles);
 
-        adapterEquips = new ArrayAdapter<>(PlantillaPage.this, android.R.layout.simple_spinner_item, equips);
+        ArrayAdapter<String> adapterEquips = new ArrayAdapter<>(PlantillaPage.this, android.R.layout.simple_spinner_item, equips);
         equipsPossibles.setAdapter(adapterEquips);
 
         equipsPossibles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -477,14 +475,12 @@ public class PlantillaPage extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                // non implemented
             }
         });
         builder.setView(alertDialogView);
 
-        builder.setNegativeButton("NO", (dialogInterface, i) -> {
-            dialog.dismiss();
-        });
+        builder.setNegativeButton("NO", (dialogInterface, i) -> dialog.dismiss());
         builder.setPositiveButton("SI", (dialogInterface, i) -> {
             TextView textView = (TextView) linearLayout.getChildAt(0);
             String text = (String) jugadorsPossibles.getSelectedItem();

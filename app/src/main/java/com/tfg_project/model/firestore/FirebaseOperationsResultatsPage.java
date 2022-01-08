@@ -3,9 +3,6 @@ package com.tfg_project.model.firestore;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,16 +26,8 @@ public class FirebaseOperationsResultatsPage extends FirebaseOperations {
         return jugadorsLocal;
     }
 
-    public void setJugadorsLocal(List<PartitJugador> jugadorsLocal) {
-        this.jugadorsLocal = jugadorsLocal;
-    }
-
     public List<PartitJugador> getJugadorsVisitant() {
         return jugadorsVisitant;
-    }
-
-    public void setJugadorsVisitant(List<PartitJugador> jugadorsVisitant) {
-        this.jugadorsVisitant = jugadorsVisitant;
     }
 
     public Task<QuerySnapshot> jugadoresLocales (String competicio, String grup, String finalJornadaSpinner, String equipLocal, String equipVisitant){
@@ -87,34 +76,30 @@ public class FirebaseOperationsResultatsPage extends FirebaseOperations {
                 .document(finalJornadaSpinner)
                 .collection("Partits")
                 .document(equipLocal + "-" + equipVisitant);
-        return doc.collection("JugadorsVisitant").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
-                    String nomJugador = documentSnapshot.getId();
-                    String docEquipLocal = (String) documentSnapshot.get("EquipLocal");
-                    String docEquipVisitant = (String) documentSnapshot.get("EquipVisitant");
-                    int golesMarcados = ((Long) documentSnapshot.get("GolesMarcados")).intValue();
-                    int golesMarcadosPenalti = ((Long) documentSnapshot.get("GolesMarcadosPenalti")).intValue();
-                    int golesMarcadosPropiaPuerta = ((Long) documentSnapshot.get("GolesMarcadosPropiaPuerta")).intValue();
-                    int golesEncajados = 0;
-                    try {
-                        golesEncajados = ((Long) documentSnapshot.get("GolesEncajados")).intValue();
-                    } catch (Exception e) {
-                        Log.e("TAG", e.getMessage());
-                    }
-                    //int minutosJugados = ((Long) documentSnapshot.get("MinutosJugados")).intValue();
-                    int minutInici = ((Long) documentSnapshot.get("MinutInici")).intValue();
-                    int minutFinal = ((Long) documentSnapshot.get("MinutFi")).intValue();
-                    boolean porteriaA0 = (Boolean) documentSnapshot.get("PorteriaA0");
-                    boolean portero = (Boolean) documentSnapshot.get("Portero");
-                    boolean amarilla1 = (Boolean) documentSnapshot.get("TarjetaAmarilla1");
-                    boolean amarilla2 = (Boolean) documentSnapshot.get("TarjetaAmarilla2");
-                    boolean roja = (Boolean) documentSnapshot.get("TarjetaRoja");
-                    jugadorsVisitant.add(new PartitJugador(nomJugador, docEquipLocal, docEquipVisitant,
-                            golesMarcados, golesMarcadosPropiaPuerta, golesMarcadosPenalti, golesEncajados,
-                            amarilla1, amarilla2, roja, portero, porteriaA0, minutInici, minutFinal));
+        return doc.collection("JugadorsVisitant").get().addOnCompleteListener(task -> {
+            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+                String nomJugador = documentSnapshot.getId();
+                String docEquipLocal = (String) documentSnapshot.get("EquipLocal");
+                String docEquipVisitant = (String) documentSnapshot.get("EquipVisitant");
+                int golesMarcados = ((Long) documentSnapshot.get("GolesMarcados")).intValue();
+                int golesMarcadosPenalti = ((Long) documentSnapshot.get("GolesMarcadosPenalti")).intValue();
+                int golesMarcadosPropiaPuerta = ((Long) documentSnapshot.get("GolesMarcadosPropiaPuerta")).intValue();
+                int golesEncajados = 0;
+                try {
+                    golesEncajados = ((Long) documentSnapshot.get("GolesEncajados")).intValue();
+                } catch (Exception e) {
+                    Log.e("TAG", e.getMessage());
                 }
+                int minutInici = ((Long) documentSnapshot.get("MinutInici")).intValue();
+                int minutFinal = ((Long) documentSnapshot.get("MinutFi")).intValue();
+                boolean porteriaA0 = (Boolean) documentSnapshot.get("PorteriaA0");
+                boolean portero = (Boolean) documentSnapshot.get("Portero");
+                boolean amarilla1 = (Boolean) documentSnapshot.get("TarjetaAmarilla1");
+                boolean amarilla2 = (Boolean) documentSnapshot.get("TarjetaAmarilla2");
+                boolean roja = (Boolean) documentSnapshot.get("TarjetaRoja");
+                jugadorsVisitant.add(new PartitJugador(nomJugador, docEquipLocal, docEquipVisitant,
+                        golesMarcados, golesMarcadosPropiaPuerta, golesMarcadosPenalti, golesEncajados,
+                        amarilla1, amarilla2, roja, portero, porteriaA0, minutInici, minutFinal));
             }
         });
     }

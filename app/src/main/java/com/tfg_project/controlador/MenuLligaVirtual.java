@@ -3,6 +3,7 @@ package com.tfg_project.controlador;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -32,7 +33,6 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +40,9 @@ import java.util.Objects;
 
 public class MenuLligaVirtual extends AppCompatActivity {
 
-    private static final String TAG = "MENU_LLIGA_VIRTUAL_PAGE_TAG";
+    private static final String COMPETICIO_CONSTANT = "competicio";
+    private static final String JORNADES_CONSTANT = "jornades";
 
-    private TextView tvCompeticioGrup;
-    private TextView tvNomLligaVirtual;
     private Button bGoToPlantilla;
     private Button bGoToResultats;
     private String grup;
@@ -58,7 +57,6 @@ public class MenuLligaVirtual extends AppCompatActivity {
     private RecyclerView recyclerViewClassificacio2;
     private Activity activity;
     private LoadingDialog loadingDialog;
-    private Context context;
     private UtilsProject utilsProject;
 
 
@@ -69,11 +67,11 @@ public class MenuLligaVirtual extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_lliga_virtual);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         initializeVariables();
 
-        goBackButton.setOnClickListener(view -> {
-            finish();
-        });
+        goBackButton.setOnClickListener(view -> finish());
         jornades = new ArrayList<>();
 
         bGoToPuntuacions.setOnClickListener(view -> {
@@ -126,25 +124,22 @@ public class MenuLligaVirtual extends AppCompatActivity {
             loadingDialog = new LoadingDialog(activity);
             loadingDialog.startLoadingDialog();
             String comp = competicio.toLowerCase().replace(' ', '-').trim();
-            mapResultat.put("competicio", comp);
+            mapResultat.put(COMPETICIO_CONSTANT, comp);
             mapResultat.put("grup", grup);
-            mapResultat.put("jornades", "");
-            FirebaseFirestore.getInstance().collection("PartitsJugats").document(comp).collection("Grups").document("grup" + grup).collection("Jornades").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    mapResultat.put("sizeJornades", String.valueOf(task.getResult().getDocuments().size()));
-                    List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                    executeForEachDocumentResultat(documents);
-                }
+            mapResultat.put(JORNADES_CONSTANT, "");
+            FirebaseFirestore.getInstance().collection("PartitsJugats").document(comp).collection("Grups").document("grup" + grup).collection("Jornades").get().addOnCompleteListener(task -> {
+                mapResultat.put("sizeJornades", String.valueOf(task.getResult().getDocuments().size()));
+                List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                executeForEachDocumentResultat(documents);
             });
         });
 
         bGoToPlantilla.setOnClickListener(view -> {
             Map<String, String> map = new HashMap<>();
-            map.put("competicio", competicio);
+            map.put(COMPETICIO_CONSTANT, competicio);
             map.put("grup", grup);
             map.put("nomLligaVirtual", nomLligaVirtual);
-            map.put("jornades", String.valueOf(jornades.size()));
+            map.put(JORNADES_CONSTANT, String.valueOf(jornades.size()));
             utilsProject.goToAnotherActivity(PlantillaPage.class, map);
         });
         ArrayList<ClassificacioBean> classificacioBeanArrayList = new ArrayList<>();
@@ -153,7 +148,7 @@ public class MenuLligaVirtual extends AppCompatActivity {
             final int[] count = {0};
             for ( DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
                 String emailUser = documentSnapshot.getId();
-                double punts = Double.valueOf((String) documentSnapshot.get("punts"));
+                double punts = Double.parseDouble((String) documentSnapshot.get("punts"));
                 DecimalFormat df = new DecimalFormat("#.##");
                 df.setRoundingMode(RoundingMode.CEILING);
                 String puntsString = df.format(punts);
@@ -218,7 +213,7 @@ public class MenuLligaVirtual extends AppCompatActivity {
                     }
                     jornades.add(new Jornada(doc.getId(), resultats));
                     String json = new Gson().toJson(jornades);
-                    mapResultat.put("jornades", json);
+                    mapResultat.put(JORNADES_CONSTANT, json);
                     count[0]++;
                     if ( count[0] == documents.size()) {
                         LoadingDialog.getInstance(activity).dissmisDialog();
@@ -231,7 +226,7 @@ public class MenuLligaVirtual extends AppCompatActivity {
     }
 
     private void initializeVariables() {
-        context = this;
+        Context context = this;
         utilsProject = new UtilsProject(context);
         activity = this;
         goBackButton = findViewById(R.id.ibGoBack);
@@ -240,12 +235,12 @@ public class MenuLligaVirtual extends AppCompatActivity {
         bGoToPlantilla = findViewById(R.id.bGoToPlantilla);
         bGoToResultats = findViewById(R.id.bGoToResultats);
 
-        tvNomLligaVirtual = findViewById(R.id.tvMenuNomLligaVirtual);
-        tvCompeticioGrup = findViewById(R.id.tvMenuLligaCompeticioGrup);
+        TextView tvNomLligaVirtual = findViewById(R.id.tvMenuNomLligaVirtual);
+        TextView tvCompeticioGrup = findViewById(R.id.tvMenuLligaCompeticioGrup);
 
         nomLligaVirtual = this.getIntent().getStringExtra("nomLliga");
         grup = this.getIntent().getStringExtra("grup");
-        competicio = this.getIntent().getStringExtra("competicio");
+        competicio = this.getIntent().getStringExtra(COMPETICIO_CONSTANT);
 
         mapResultat = new HashMap<>();
 

@@ -16,15 +16,7 @@ public class Jornada implements Serializable {
         return jornada;
     }
 
-    public void setJornada(String jornada) {
-        this.jornada = jornada;
-    }
-
     public List<Resultat> getResultats() {
         return resultats;
-    }
-
-    public void setResultats(List<Resultat> resultats) {
-        this.resultats = resultats;
     }
 }

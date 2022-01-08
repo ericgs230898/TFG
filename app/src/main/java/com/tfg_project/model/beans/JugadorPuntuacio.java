@@ -15,23 +15,11 @@ public class JugadorPuntuacio {
         return posicio;
     }
 
-    public void setPosicio(String posicio) {
-        this.posicio = posicio;
-    }
-
     public String getNomJugador() {
         return nomJugador;
     }
 
-    public void setNomJugador(String nomJugador) {
-        this.nomJugador = nomJugador;
-    }
-
     public String getPunts() {
         return punts;
-    }
-
-    public void setPunts(String punts) {
-        this.punts = punts;
     }
 }

@@ -3,8 +3,8 @@ package com.tfg_project.model.beans;
 import java.util.List;
 
 public class AlineacioJugadorPuntuacio {
-    private String alineacio;
-    private List<JugadorPuntuacio> jugadorPuntuacioList;
+    private final String alineacio;
+    private final List<JugadorPuntuacio> jugadorPuntuacioList;
 
     public AlineacioJugadorPuntuacio(String alineacio, List<JugadorPuntuacio> jugadorPuntuacioList) {
         this.alineacio = alineacio;
@@ -15,15 +15,7 @@ public class AlineacioJugadorPuntuacio {
         return alineacio;
     }
 
-    public void setAlineacio(String alineacio) {
-        this.alineacio = alineacio;
-    }
-
     public List<JugadorPuntuacio> getJugadorPuntuacioList() {
         return jugadorPuntuacioList;
-    }
-
-    public void setJugadorPuntuacioList(List<JugadorPuntuacio> jugadorPuntuacioList) {
-        this.jugadorPuntuacioList = jugadorPuntuacioList;
     }
 }

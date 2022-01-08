@@ -2,6 +2,7 @@ package com.tfg_project.controlador;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,38 +20,19 @@ import com.tfg_project.model.firestore.FirebaseOperationsLoginPage;
 import com.tfg_project.model.beans.LoadingDialog;
 import com.tfg_project.model.utils.UtilsProject;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class LoginPage extends AppCompatActivity {
 
-    private static final String TAG = "LOGIN_PAGE_TAG";
-
     private TextView tvRegister;
-    private EditText etLoginMail, etLoginPassword;
+    private EditText etLoginMail;
+    private EditText etLoginPassword;
     private FirebaseAuth mAuth;
     private Button bIniciaSessio;
     private TextView forgotPassword;
     private AlertDialog alertDialogForgotPassword;
     private UtilsProject utilsProject;
-    private Context context;
 
-    private static List<String> competicions = Arrays.asList("primera-catalana", "segona-catalana", "tercera-catalana", "quarta-catalana");
-    private static List<String> jornades = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-            "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-            "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-            "31", "32", "33", "34", "35", "36", "37", "38", "39", "40");
-
-    private static List<String> grups = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-            "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-            "21", "22", "23", "24", "25", "26", "27", "28", "29", "30");
-
-    private static final String USUARI = "Usuari";
-    private static final String USUARI_LOWERCASE = "usuari";
     private static final String NO = "NO";
     private static final String SI = "SI";
-    private static final String USERNAME = "username";
-    private static final String EMAIL = "email";
     private FirebaseOperationsLoginPage firebaseOperations;
 
 
@@ -58,6 +40,8 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         initializePrivateVariables();
 
@@ -76,9 +60,7 @@ public class LoginPage extends AppCompatActivity {
             }
         }
 
-        tvRegister.setOnClickListener(view -> {
-            utilsProject.goToAnotherActivity(RegisterPage.class, null);
-        });
+        tvRegister.setOnClickListener(view -> utilsProject.goToAnotherActivity(RegisterPage.class, null));
         bIniciaSessio.setOnClickListener(view -> {
             if (utilsProject.checkParameters(etLoginMail.getText().toString(), etLoginPassword.getText().toString())){
                 final LoadingDialog loadingDialog = new LoadingDialog(activity);
@@ -97,7 +79,7 @@ public class LoginPage extends AppCompatActivity {
         builder.setView(alertDialogView);
         builder.setPositiveButton(SI, (dialogInterface, i) -> {
             String mailForgotPassword = ((EditText) alertDialogView.findViewById(R.id.etMailForgotPassword)).getText().toString();
-            if ( utilsProject.isValidMail(mailForgotPassword)){
+            if (UtilsProject.isValidMail(mailForgotPassword)){
                 firebaseOperations.sendPasswordResetEmail(mailForgotPassword);
                 alertDialogForgotPassword.dismiss();
             } else {
@@ -110,7 +92,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     private void initializePrivateVariables() {
-        context = this;
+        Context context = this;
         utilsProject = new UtilsProject(context);
         mAuth = FirebaseAuth.getInstance();
         etLoginMail = findViewById(R.id.etLoginMail);

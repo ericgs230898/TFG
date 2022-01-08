@@ -13,15 +13,7 @@ public class JugadorPosicio {
         return nomJugador;
     }
 
-    public void setNomJugador(String nomJugador) {
-        this.nomJugador = nomJugador;
-    }
-
     public String getPosicio() {
         return posicio;
-    }
-
-    public void setPosicio(String posicio) {
-        this.posicio = posicio;
     }
 }

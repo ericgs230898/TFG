@@ -13,15 +13,7 @@ public class Equip {
         return nomEquip;
     }
 
-    public void setNomEquip(String nomEquip) {
-        this.nomEquip = nomEquip;
-    }
-
     public String getLinkEquip() {
         return linkEquip;
-    }
-
-    public void setLinkEquip(String linkEquip) {
-        this.linkEquip = linkEquip;
     }
 }

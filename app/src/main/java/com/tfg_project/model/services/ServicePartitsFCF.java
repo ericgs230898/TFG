@@ -7,19 +7,16 @@ import java.util.List;
 
 public class ServicePartitsFCF {
 
-    private static List<String> competicions = Arrays.asList("quarta-catalana");
-    private static List<String> jornades = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+    private final static List<String> competicions = Arrays.asList("quarta-catalana");
+    private final static List<String> jornades = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
                                                         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                                                         "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
                                                         "31", "32", "33", "34", "35", "36", "37", "38", "39", "40");
 
-    private static List<String> grups = Arrays.asList("1");
+    private static final List<String> grups = Arrays.asList("1");
 
-    private String linea = "<tr class=\"linia\">";
-    private String equipLocalLink = "<td class=\"p-5 resultats-w-equip tr\">";
-    private String equipVisitantLink = "<td class=\"p-5 resultats-w-equip tl\">";
-    private String actaLink = "<td class=\"p-5 resultats-w-resultat tc\">";
-    private String resultatLink = "<div class=\"tc fs-17 white bg-darkgrey p-r\">";
+    private final String linea = "<tr class=\"linia\">";
+    private final String resultatLink = "<div class=\"tc fs-17 white bg-darkgrey p-r\">";
 
     public ServicePartitsFCF() {
     }
@@ -92,11 +89,14 @@ public class ServicePartitsFCF {
     private Partit getPartit(String textString) {
         String string = textString.trim();
         Partit partit = new Partit();
+        String equipLocalLink = "<td class=\"p-5 resultats-w-equip tr\">";
         int localIndexInici = string.indexOf(equipLocalLink);
         partit.setEquipLocal(getEquip(string, localIndexInici));
+        String equipVisitantLink = "<td class=\"p-5 resultats-w-equip tl\">";
         int visitanteIndexInici = string.indexOf(equipVisitantLink);
         partit.setEquipVisitante(getEquip(string, visitanteIndexInici));
-        int resultIndex = string.indexOf(actaLink);
+        String actaLink1 = "<td class=\"p-5 resultats-w-resultat tc\">";
+        int resultIndex = string.indexOf(actaLink1);
         if ( resultIndex != -1 && visitanteIndexInici != -1 ) {
             String subStringResultat = string.substring(resultIndex, visitanteIndexInici);
             if (subStringResultat.indexOf("R") > 0) {
@@ -118,7 +118,7 @@ public class ServicePartitsFCF {
                 String golesVisitante = result.substring(indexGuion+1);
                 partit.setGolesLocal(Integer.valueOf(golesLocal.trim()));
                 partit.setGolesVisitante(Integer.valueOf(golesVisitante.trim()));
-                int actaIndex = string.indexOf(actaLink);
+                int actaIndex = string.indexOf(actaLink1);
                 String actaLink = getActa(string, actaIndex);
                 partit.setActa(actaLink);
             }

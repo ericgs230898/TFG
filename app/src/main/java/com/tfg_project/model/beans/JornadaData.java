@@ -15,23 +15,12 @@ public class JornadaData {
         return jornada;
     }
 
-    public void setJornada(String jornada) {
-        this.jornada = jornada;
-    }
-
     public String getDataMin() {
         return dataMin;
-    }
-
-    public void setDataMin(String dataMin) {
-        this.dataMin = dataMin;
     }
 
     public String getDataMax() {
         return dataMax;
     }
 
-    public void setDataMax(String dataMax) {
-        this.dataMax = dataMax;
-    }
 }

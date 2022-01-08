@@ -16,7 +16,6 @@ public class FirebaseOperationsPuntuacionsPage extends FirebaseOperations {
     private Map<String, AlineacioJugadorPuntuacio> mapPuntuacions;
     private List<DocumentSnapshot> listDocuments;
     private List<DocumentSnapshot> listDocuments2;
-    private List<DocumentSnapshot> listDocuments3;
     private List<String> jornadesPossibles;
 
     public FirebaseOperationsPuntuacionsPage(Context context) {
@@ -24,49 +23,12 @@ public class FirebaseOperationsPuntuacionsPage extends FirebaseOperations {
         mapPuntuacionsJoc = new HashMap<>();
         listDocuments = new ArrayList<>();
         listDocuments2 = new ArrayList<>();
-        listDocuments3 = new ArrayList<>();
         mapPuntuacions = new HashMap<>();
         jornadesPossibles = new ArrayList<>();
     }
 
-    public List<String> getJornadesPossibles() {
-        return jornadesPossibles;
-    }
-
-    public void setJornadesPossibles(List<String> jornadesPossibles) {
-        this.jornadesPossibles = jornadesPossibles;
-    }
-
-    public Map<String, AlineacioJugadorPuntuacio> getMapPuntuacions() {
-        return mapPuntuacions;
-    }
-
-    public void setMapPuntuacions(Map<String, AlineacioJugadorPuntuacio> mapPuntuacions) {
-        this.mapPuntuacions = mapPuntuacions;
-    }
-
     public Map<String, String> getMapPuntuacionsJoc() {
         return mapPuntuacionsJoc;
-    }
-
-    public void setMapPuntuacionsJoc(Map<String, String> mapPuntuacionsJoc) {
-        this.mapPuntuacionsJoc = mapPuntuacionsJoc;
-    }
-
-    public List<DocumentSnapshot> getListDocuments() {
-        return listDocuments;
-    }
-
-    public void setListDocuments(List<DocumentSnapshot> listDocuments) {
-        this.listDocuments = listDocuments;
-    }
-
-    public List<DocumentSnapshot> getListDocuments2() {
-        return listDocuments2;
-    }
-
-    public void setListDocuments2(List<DocumentSnapshot> listDocuments2) {
-        this.listDocuments2 = listDocuments2;
     }
 
     public Task<DocumentSnapshot> getPuntuacionsJoc(){

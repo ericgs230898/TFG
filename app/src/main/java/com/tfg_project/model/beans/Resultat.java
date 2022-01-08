@@ -21,39 +21,19 @@ public class Resultat implements Serializable {
         return equipLocal;
     }
 
-    public void setEquipLocal(String equipLocal) {
-        this.equipLocal = equipLocal;
-    }
-
     public String getEquipVisitant() {
         return equipVisitant;
-    }
-
-    public void setEquipVisitant(String equipVisitant) {
-        this.equipVisitant = equipVisitant;
     }
 
     public int getGolesLocal() {
         return golesLocal;
     }
 
-    public void setGolesLocal(int golesLocal) {
-        this.golesLocal = golesLocal;
-    }
-
     public int getGolesVisitant() {
         return golesVisitant;
     }
 
-    public void setGolesVisitant(int golesVisitant) {
-        this.golesVisitant = golesVisitant;
-    }
-
     public String getCondicio() {
         return condicio;
-    }
-
-    public void setCondicio(String condicio) {
-        this.condicio = condicio;
     }
 }

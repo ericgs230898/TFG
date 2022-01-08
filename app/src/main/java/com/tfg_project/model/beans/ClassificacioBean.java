@@ -1,8 +1,8 @@
 package com.tfg_project.model.beans;
 
 public class ClassificacioBean {
-    private String username;
-    private String punts;
+    private final String username;
+    private final String punts;
 
     public ClassificacioBean(String username, String punts) {
         this.username = username;
@@ -13,15 +13,7 @@ public class ClassificacioBean {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPunts() {
         return punts;
-    }
-
-    public void setPunts(String punts) {
-        this.punts = punts;
     }
 }

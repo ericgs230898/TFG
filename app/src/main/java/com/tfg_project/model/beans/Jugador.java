@@ -13,15 +13,8 @@ public class Jugador {
         return nomJugador;
     }
 
-    public void setNomJugador(String nomJugador) {
-        this.nomJugador = nomJugador;
-    }
-
     public String getIdEquip() {
         return idEquip;
     }
-
-    public void setIdEquip(String idEquip) {
-        this.idEquip = idEquip;
-    }
 }
+

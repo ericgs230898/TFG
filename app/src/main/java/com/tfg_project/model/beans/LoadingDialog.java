@@ -8,7 +8,7 @@ import com.tfg_project.R;
 
 public final class LoadingDialog {
     private static LoadingDialog loadingDialog;
-    public Activity activity;
+    private final Activity activity;
     private AlertDialog dialog;
 
     public LoadingDialog (Activity myActivity) {
@@ -31,7 +31,7 @@ public final class LoadingDialog {
     }
 
     public void eliminateLoadingDialog(){
-        this.loadingDialog = null;
+        loadingDialog = null;
     }
 
     public void startLoadingDialog(){

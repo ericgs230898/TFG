@@ -17,7 +17,7 @@ import java.util.List;
 public class ClassificacioAdapter2 extends
         RecyclerView.Adapter<ClassificacioAdapter2.ViewHolder> {
 
-    private List<ClassificacioBean> classificacioAdapterList;
+    private final List<ClassificacioBean> classificacioAdapterList;
 
     public ClassificacioAdapter2(List<ClassificacioBean> classificacioAdapterList) {
         this.classificacioAdapterList = classificacioAdapterList;
@@ -38,11 +38,11 @@ public class ClassificacioAdapter2 extends
     public void onBindViewHolder(@NonNull ClassificacioAdapter2.ViewHolder holder, int position) {
         ClassificacioBean classificacioBean = classificacioAdapterList.get(position);
 
-        TextView tvPunts = holder.tvPuntsUsuari;
+        TextView tvPunts = holder.getTvPuntsUsuari();
         tvPunts.setText(classificacioBean.getPunts());
-        TextView tvUsername = holder.tvNomUsuari;
+        TextView tvUsername = holder.getTvNomUsuari();
         tvUsername.setText(classificacioBean.getUsername());
-        TextView tvPosicio = holder.tvPosicio;
+        TextView tvPosicio = holder.getTvPosicio();
         tvPosicio.setText(String.valueOf(position+4));
         tvPosicio.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
@@ -54,15 +54,27 @@ public class ClassificacioAdapter2 extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNomUsuari;
-        public TextView tvPuntsUsuari;
-        public TextView tvPosicio;
+        private final TextView tvNomUsuari;
+        private final TextView tvPuntsUsuari;
+        private final TextView tvPosicio;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNomUsuari = itemView.findViewById(R.id.tvClassificacioUsuari);
             tvPuntsUsuari = itemView.findViewById(R.id.tvClassificacioPunts);
             tvPosicio = itemView.findViewById(R.id.tvPosicioClassificacio);
+        }
+
+        public TextView getTvNomUsuari() {
+            return tvNomUsuari;
+        }
+
+        public TextView getTvPuntsUsuari() {
+            return tvPuntsUsuari;
+        }
+
+        public TextView getTvPosicio() {
+            return tvPosicio;
         }
     }
 }

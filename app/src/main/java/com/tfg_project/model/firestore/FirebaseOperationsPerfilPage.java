@@ -10,7 +10,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tfg_project.controlador.LoginPage;
-import com.tfg_project.model.beans.Constants;
+import com.tfg_project.model.utils.Constants;
 
 import java.util.List;
 
@@ -24,19 +24,11 @@ public class FirebaseOperationsPerfilPage extends FirebaseOperations {
         return usuari;
     }
 
-    public void setUsuari(String usuari) {
-        this.usuari = usuari;
-    }
-
     public Task<DocumentSnapshot> getUsername(){
-        return super.getFirebaseFirestore().collection(Constants.USUARI).document(super.getFirebaseAuth().getCurrentUser().getEmail()).get().addOnCompleteListener(task -> {
-            usuari = (String) task.getResult().get("usuari");
-        });
+        return super.getFirebaseFirestore().collection(Constants.USUARI).document(super.getFirebaseAuth().getCurrentUser().getEmail()).get().addOnCompleteListener(task -> usuari = (String) task.getResult().get("usuari"));
     }
     public void modificaDadesUsuari(String newUsername){
-        super.getFirebaseFirestore().collection("Usuari").document(super.getFirebaseAuth().getCurrentUser().getEmail()).update("usuari", newUsername).addOnCompleteListener(task -> {
-            super.getUtilsProject().makeToast("Dades modificades correctament.");
-        });
+        super.getFirebaseFirestore().collection("Usuari").document(super.getFirebaseAuth().getCurrentUser().getEmail()).update("usuari", newUsername).addOnCompleteListener(task -> super.getUtilsProject().makeToast("Dades modificades correctament."));
     }
 
     public void eliminaUsuari(){

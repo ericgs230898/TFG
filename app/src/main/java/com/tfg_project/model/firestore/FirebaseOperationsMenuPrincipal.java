@@ -16,8 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
+    private static final String LLIGUES_VIRTUALS = "LliguesVirtuals";
+    private static final String COMPETICIO = "competicio";
     private List<String> listLliguesUsuari;
-    private List<LliguesVirtuals> lliguesVirtualsUsuariList;
+    private final List<LliguesVirtuals> lliguesVirtualsUsuariList;
 
     public FirebaseOperationsMenuPrincipal(Context context) {
         super(context);
@@ -43,13 +45,12 @@ public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
     }
 
     public Task<DocumentSnapshot> getInfoLligaVirtual (String nomLlVirtual){
-        return super.getFirebaseFirestore().collection("LliguesVirtuals").document(nomLlVirtual).get().addOnCompleteListener(task -> {
+        return super.getFirebaseFirestore().collection(LLIGUES_VIRTUALS).document(nomLlVirtual).get().addOnCompleteListener(task -> {
             if ( task.isSuccessful() ) {
                 final DocumentSnapshot documentSnapshot = task.getResult();
-                final String competicio = (String) documentSnapshot.get("competicio");
+                final String competicio = (String) documentSnapshot.get(COMPETICIO);
                 final String grup = (String) documentSnapshot.get("grup");
                 final  ArrayList<String> participants = (ArrayList<String>) documentSnapshot.get("usuaris");
-                LliguesVirtuals lliguesVirtuals;
                 if ( participants != null ) {
                     lliguesVirtualsUsuariList.add(new LliguesVirtuals(nomLlVirtual, String.valueOf(participants.size()), competicio, grup));
                 }
@@ -59,13 +60,13 @@ public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
     }
 
     public Task<DocumentSnapshot> addLligaVirtual(String nomLligaVirtual, String password){
-        return super.getFirebaseFirestore().collection("LliguesVirtuals").document(nomLligaVirtual).get().addOnCompleteListener(task -> {
+        return super.getFirebaseFirestore().collection(LLIGUES_VIRTUALS).document(nomLligaVirtual).get().addOnCompleteListener(task -> {
             if ( task.isSuccessful() ) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 String passwordDB = (String) documentSnapshot.get("password");
                 if (password.equals(passwordDB)){
                     super.getUtilsProject().makeToast("Has sigut afegit a la lliga virtual!");
-                    lliguesVirtualsUsuariList.add(new LliguesVirtuals(nomLligaVirtual, String.valueOf(lliguesVirtualsUsuariList.size()+1), (String) documentSnapshot.get("competicio"), (String) documentSnapshot.get("grup")));
+                    lliguesVirtualsUsuariList.add(new LliguesVirtuals(nomLligaVirtual, String.valueOf(lliguesVirtualsUsuariList.size()+1), (String) documentSnapshot.get(COMPETICIO), (String) documentSnapshot.get("grup")));
                     putNewUserToLligaVirtual(nomLligaVirtual, false, null);
                 } else {
                     super.getUtilsProject().makeToast("El nom de la lliga o la contrasenya no són correctes");
@@ -90,12 +91,12 @@ public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
             }
         }));
 
-        DocumentReference documentReference1 = super.getFirebaseFirestore().collection("LliguesVirtuals").document(nomLligaVirtual);
+        DocumentReference documentReference1 = super.getFirebaseFirestore().collection(LLIGUES_VIRTUALS).document(nomLligaVirtual);
         if ( lligaVirtualNova ) {
             LliguesVirtuals lliguesVirtuals = new LliguesVirtuals();
             lliguesVirtuals.setNomLligaVirtual(nomLligaVirtual);
             for ( Map.Entry<String, Object> entry : map.entrySet() ){
-                if ( "competicio".equals(entry.getKey())){
+                if ( COMPETICIO.equals(entry.getKey())){
                     lliguesVirtuals.setCompeticio((String) entry.getValue());
                 }
                 if ( "grup".equals(entry.getKey())){

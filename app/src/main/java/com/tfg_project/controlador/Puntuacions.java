@@ -1,6 +1,7 @@
 package com.tfg_project.controlador;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,21 +34,16 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Puntuacions extends AppCompatActivity {
 
-    private static final String TAG = "PUNTUACIONS_PAGE_TAG";
-
     private ImageButton buttonBack;
     private Spinner spinner;
     private RecyclerView recyclerViewPuntuacions;
     private TextView tvPuntuacio;
-    private Map<String, List<JugadorPuntuacio>> mapListPuntuacionsJugadors;
-    private List<JugadorPuntuacio> listPuntuacionsJugadors;
     private PuntuacionsJugadorsAdapter adapter;
     private TextView tvAlineacio;
     private Context context;
@@ -63,6 +59,8 @@ public class Puntuacions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puntuacions);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         UtilsProject utilsProject = new UtilsProject(this);
 
         countJornades = 0;
@@ -72,9 +70,7 @@ public class Puntuacions extends AppCompatActivity {
         String nomLligaVirtual = this.getIntent().getStringExtra("nomLligaVirtual");
 
         Task<DocumentSnapshot> taskPuntuacionsJoc = firebaseOperationsPuntuacionsPage.getPuntuacionsJoc();
-        Tasks.whenAllComplete(taskPuntuacionsJoc).addOnCompleteListener(task -> {
-            mapPuntuacionsJoc = firebaseOperationsPuntuacionsPage.getMapPuntuacionsJoc();
-        });
+        Tasks.whenAllComplete(taskPuntuacionsJoc).addOnCompleteListener(task -> mapPuntuacionsJoc = firebaseOperationsPuntuacionsPage.getMapPuntuacionsJoc());
 
         mapPuntuacions = new HashMap<>();
         jornadesPossibles = new ArrayList<>();
@@ -130,9 +126,16 @@ public class Puntuacions extends AppCompatActivity {
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View alertDialogView = inflater.inflate(R.layout.alert_dialog_puntuacions_del_joc, null);
 
-            TextView tvGolsMarcats, tvGolsMarcatsPropia, tvGolsMarcatsPenalti,
-                    tvGolRebutDefensa, tvGolRebutPorter, tvMinutJugat, tvPorteria0Defensa,
-                    tvPorteria0Porter, tvTarjetaAmarilla, tvTarjetaRoja;
+            TextView tvGolsMarcats;
+            TextView tvGolsMarcatsPropia;
+            TextView tvGolsMarcatsPenalti;
+            TextView tvGolRebutDefensa;
+            TextView tvGolRebutPorter;
+            TextView tvMinutJugat;
+            TextView tvPorteria0Defensa;
+            TextView tvPorteria0Porter;
+            TextView tvTarjetaAmarilla;
+            TextView tvTarjetaRoja;
 
             tvGolsMarcats = alertDialogView.findViewById(R.id.tvGolsMarcatsPuntuacionsJoc);
             tvGolsMarcatsPenalti = alertDialogView.findViewById(R.id.tvGolsMarcatsPenalPuntuacionsJoc);
@@ -155,13 +158,9 @@ public class Puntuacions extends AppCompatActivity {
             tvTarjetaAmarilla.setText(mapPuntuacionsJoc.get("tarjetaAmarilla"));
             tvTarjetaRoja.setText(mapPuntuacionsJoc.get("tarjetaRoja"));
             builder.setView(alertDialogView);
-            builder.setPositiveButton("OK", (dialogInterface, i) -> {
-                builder.create().dismiss();
-            });
+            builder.setPositiveButton("OK", (dialogInterface, i) -> builder.create().dismiss());
             builder.create().show();
         });
-
-
     }
 
     private void setRecyclerView() {
@@ -183,27 +182,24 @@ public class Puntuacions extends AppCompatActivity {
                 String puntuacio = getPuntuacioTotal(alineacioJugadorPuntuacio.getJugadorPuntuacioList());
                 tvPuntuacio.setText(new StringBuilder().append("Punts totals: ").append(puntuacio.replace(",", ".")).toString());
                 List<JugadorPuntuacio> listJugadors = alineacioJugadorPuntuacio.getJugadorPuntuacioList();
-                Collections.sort(listJugadors, new Comparator<JugadorPuntuacio>() {
-                    @Override
-                    public int compare(JugadorPuntuacio jugadorPuntuacio, JugadorPuntuacio t1) {
-                        if (jugadorPuntuacio.getPosicio().equals("POR")){
-                            return -1;
-                        } else if ( jugadorPuntuacio.getPosicio().equals("DFC")){
-                            if (t1.getPosicio().equals("MC") || t1.getPosicio().equals("DC")) return -1;
-                            else if ( t1.getPosicio().equals("DFC")) return 0;
-                            else return 1;
-                        }
-                        else if ( jugadorPuntuacio.getPosicio().equals("MC")){
-                            if (t1.getPosicio().equals("DC")) return -1;
-                            else if ( t1.getPosicio().equals("MC")) return 0;
-                            else return 1;
-                        }
-                        else if ( jugadorPuntuacio.getPosicio().equals("DC")){
-                            if (t1.getPosicio().equals("DC")) return 0;
-                            else return 1;
-                        }
-                        return 0;
+                Collections.sort(listJugadors, (jugadorPuntuacio, t1) -> {
+                    if (jugadorPuntuacio.getPosicio().equals("POR")){
+                        return -1;
+                    } else if ( jugadorPuntuacio.getPosicio().equals("DFC")){
+                        if (t1.getPosicio().equals("MC") || t1.getPosicio().equals("DC")) return -1;
+                        else if ( t1.getPosicio().equals("DFC")) return 0;
+                        else return 1;
                     }
+                    else if ( jugadorPuntuacio.getPosicio().equals("MC")){
+                        if (t1.getPosicio().equals("DC")) return -1;
+                        else if ( t1.getPosicio().equals("MC")) return 0;
+                        else return 1;
+                    }
+                    else if ( jugadorPuntuacio.getPosicio().equals("DC")){
+                        if (t1.getPosicio().equals("DC")) return 0;
+                        else return 1;
+                    }
+                    return 0;
                 });
                 adapter = new PuntuacionsJugadorsAdapter(listJugadors);
                 recyclerViewPuntuacions.setAdapter(adapter);
@@ -212,7 +208,7 @@ public class Puntuacions extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                // non implemented
             }
         });
     }
@@ -228,45 +224,6 @@ public class Puntuacions extends AppCompatActivity {
         return df.format(total);
     }
 
-    private void getPuntuacioJugador(String competicio, String grup, String jornada, String jugador, String posicio){
-        competicio = competicio.toLowerCase().replace(" ", "-");
-        String finalJornada = jornada.toLowerCase().replaceAll("\\s","");
-        FirebaseFirestore.getInstance().collection("Puntuacions").document(competicio)
-                .collection("Grups").document("grup"+grup).collection("Jornades")
-                .document(finalJornada).collection("Jugadors").document(jugador).get().addOnCompleteListener(task -> {
-                    String punts = "0";
-                    try {
-                        punts = (String) task.getResult().get(posicio);
-                    } catch ( Exception e ){
-                        punts = "0";
-                    }
-                    if ( punts == null ) punts = "0";
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    df.setRoundingMode(RoundingMode.CEILING);
-                    if (!punts.equals("")){
-                        List<JugadorPuntuacio> jugadorPuntuacioAux = mapListPuntuacionsJugadors.get(jornada);
-                        jugadorPuntuacioAux.add(new JugadorPuntuacio(posicio, jugador, df.format(Double.valueOf(punts))));
-                        mapListPuntuacionsJugadors.put(finalJornada, jugadorPuntuacioAux);
-                        refreshAdapter(jornada);
-                        /*listPuntuacionsJugadors.add(new JugadorPuntuacio(posicio, jugador, df.format(Double.valueOf(punts))));
-                        adapter.notifyItemInserted(listPuntuacionsJugadors.size()-1);*/
-                    } else {
-                        List<JugadorPuntuacio> jugadorPuntuacioAux = mapListPuntuacionsJugadors.get(jornada);
-                        jugadorPuntuacioAux.add(new JugadorPuntuacio(posicio, jugador, df.format(Double.valueOf(punts))));
-                        mapListPuntuacionsJugadors.put(finalJornada, jugadorPuntuacioAux);
-                        refreshAdapter(jornada);
-                    }
-                });
-    }
-
-    private void refreshAdapter(String jornada) {
-        List<JugadorPuntuacio> jugadorPuntuacioListAux = mapListPuntuacionsJugadors.get(jornada);
-        if ( spinner.getSelectedItem().equals(jornada)){
-            adapter = new PuntuacionsJugadorsAdapter(jugadorPuntuacioListAux);
-            recyclerViewPuntuacions.setAdapter(adapter);
-        }
-    }
-
     private void initializeVariables() {
         context = this;
         buttonBack = findViewById(R.id.ibBackButtonPuntuacions);
@@ -275,8 +232,7 @@ public class Puntuacions extends AppCompatActivity {
         tvPuntuacio = findViewById(R.id.tvPuntsJornada);
 
         tvAlineacio = findViewById(R.id.tvAlineacioPuntuacions);
-        mapListPuntuacionsJugadors = new HashMap<>();
-        listPuntuacionsJugadors = new ArrayList<>();
+        List<JugadorPuntuacio> listPuntuacionsJugadors = new ArrayList<>();
         adapter = new PuntuacionsJugadorsAdapter(listPuntuacionsJugadors);
         recyclerViewPuntuacions.setAdapter(adapter);
         recyclerViewPuntuacions.setLayoutManager(new LinearLayoutManager(this));

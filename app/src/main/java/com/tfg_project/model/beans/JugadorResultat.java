@@ -30,79 +30,40 @@ public class JugadorResultat {
         return golesEncajados;
     }
 
-    public void setGolesEncajados(int golesEncajados) {
-        this.golesEncajados = golesEncajados;
-    }
-
     public boolean isPortero() {
         return portero;
-    }
-
-    public void setPortero(boolean portero) {
-        this.portero = portero;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
     public int getMinutsJugats() {
         return minutsJugats;
-    }
-
-    public void setMinutsJugats(int minutsJugats) {
-        this.minutsJugats = minutsJugats;
     }
 
     public boolean isTarjetaAmarilla1() {
         return tarjetaAmarilla1;
     }
 
-    public void setTarjetaAmarilla1(boolean tarjetaAmarilla1) {
-        this.tarjetaAmarilla1 = tarjetaAmarilla1;
-    }
-
     public boolean isTarjetaAmarilla2() {
         return tarjetaAmarilla2;
-    }
-
-    public void setTarjetaAmarilla2(boolean tarjetaAmarilla2) {
-        this.tarjetaAmarilla2 = tarjetaAmarilla2;
     }
 
     public boolean isTarjetaRoja1() {
         return tarjetaRoja1;
     }
 
-    public void setTarjetaRoja1(boolean tarjetaRoja1) {
-        this.tarjetaRoja1 = tarjetaRoja1;
-    }
-
     public int getGolesMarcados() {
         return golesMarcados;
-    }
-
-    public void setGolesMarcados(int golesMarcados) {
-        this.golesMarcados = golesMarcados;
     }
 
     public int getGolesMarcadosPenalti() {
         return golesMarcadosPenalti;
     }
 
-    public void setGolesMarcadosPenalti(int golesMarcadosPenalti) {
-        this.golesMarcadosPenalti = golesMarcadosPenalti;
-    }
-
     public int getGolesMarcadosPropia() {
         return golesMarcadosPropia;
     }
 
-    public void setGolesMarcadosPropia(int golesMarcadosPropia) {
-        this.golesMarcadosPropia = golesMarcadosPropia;
-    }
 }

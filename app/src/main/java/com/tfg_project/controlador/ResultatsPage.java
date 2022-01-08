@@ -1,6 +1,7 @@
 package com.tfg_project.controlador;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,14 +33,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 public class ResultatsPage extends AppCompatActivity {
 
-    //private static final String TAG = "RESULTATS_PAGE_TAG";
     private static final String RETIRAT = "R";
     private static final String DESCANS = "D";
 
     private Spinner spinnerJornades;
-    private FirebaseFirestore firebaseFirestore;
     private String competicio;
     private String grup;
     private LinearLayout linearLayoutResultats;
@@ -56,6 +57,8 @@ public class ResultatsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultats_page);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         initializeVariables();
         setSpinnerJornades(Integer.parseInt(sizeJornades));
         initializeSpinner();
@@ -69,8 +72,8 @@ public class ResultatsPage extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String jornadaSpinner = (String) spinnerJornades.getSelectedItem();
-                jornadaSpinner = jornadaSpinner.replaceAll("\\s","");
-                jornadaSpinner = jornadaSpinner.replaceAll(" ", "");
+                jornadaSpinner = jornadaSpinner.replace("\\s","");
+                jornadaSpinner = jornadaSpinner.replace(" ", "");
                 jornadaSpinner = jornadaSpinner.toLowerCase();
                 LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                 LinearLayout linearLayout = new LinearLayout(context);
@@ -105,7 +108,7 @@ public class ResultatsPage extends AppCompatActivity {
                                     tvResultat.setText(getString(R.string.no_jugat));
                                     break;
                                 case "-":
-                                    tvResultat.setText(new StringBuilder().append(String.valueOf(resultat.getGolesLocal())).append("-").append(String.valueOf(resultat.getGolesVisitant())).toString());
+                                    tvResultat.setText(new StringBuilder().append(resultat.getGolesLocal()).append("-").append(resultat.getGolesVisitant()).toString());
                                     break;
                                 case DESCANS:
                                     tvResultat.setText(DESCANS);
@@ -117,7 +120,7 @@ public class ResultatsPage extends AppCompatActivity {
                                     tvResultat.setText("");
                                     break;
                             }
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
                             myView.setLayoutParams(params);
                             String finalJornadaSpinner = jornadaSpinner;
                             myView.setOnClickListener(view1 -> {
@@ -125,7 +128,6 @@ public class ResultatsPage extends AppCompatActivity {
                                     utilsProject.makeToast("No hi ha dades d'aquest partit");
                                 }
                                 else {
-                                    System.out.println("CONDICION --> " + condicio);
                                     Map<String, String> map = new HashMap<>();
                                     map.put("grup", grup);
                                     map.put("competicio", competicio);
@@ -136,10 +138,10 @@ public class ResultatsPage extends AppCompatActivity {
                                     map.put("golesVisitant", String.valueOf(golesVisitant));
 
                                     Task<QuerySnapshot> taskLocal = firebaseOperationsResultatsPage.jugadoresLocales(competicio, grup, finalJornadaSpinner, equipLocal, equipVisitant);
-                                    Task<QuerySnapshot> taskVisitant = firebaseOperationsResultatsPage.jugadoresLocales(competicio, grup, finalJornadaSpinner, equipLocal, equipVisitant);
+                                    Task<QuerySnapshot> taskVisitant = firebaseOperationsResultatsPage.jugadoresVisitantes(competicio, grup, finalJornadaSpinner, equipLocal, equipVisitant);
                                     Tasks.whenAllComplete(Arrays.asList(taskLocal,taskVisitant)).addOnCompleteListener(task -> {
                                         List<PartitJugador> jugadorsLocal = firebaseOperationsResultatsPage.getJugadorsLocal();
-                                        List<PartitJugador> jugadorsVisitant = firebaseOperationsResultatsPage.getJugadorsLocal();
+                                        List<PartitJugador> jugadorsVisitant = firebaseOperationsResultatsPage.getJugadorsVisitant();
                                         String gsonLocals = new Gson().toJson(jugadorsLocal);
                                         String gsonVisitants = new Gson().toJson(jugadorsVisitant);
                                         map.put("loc", gsonLocals);
@@ -161,7 +163,7 @@ public class ResultatsPage extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+            // non implemented
             }
         });
     }
@@ -184,7 +186,6 @@ public class ResultatsPage extends AppCompatActivity {
 
         spinnerJornades = findViewById(R.id.spinnerJornades);
         spinnerJornades.setBackgroundResource(R.drawable.customborder7);
-        firebaseFirestore = FirebaseFirestore.getInstance();
 
         competicio = this.getIntent().getStringExtra("competicio");
         grup = this.getIntent().getStringExtra("grup");
@@ -192,8 +193,6 @@ public class ResultatsPage extends AppCompatActivity {
         String jornadesJson = this.getIntent().getStringExtra("jornades");
         Type listType = new TypeToken<ArrayList<Jornada>>(){}.getType();
         jornades = new Gson().fromJson(jornadesJson, listType);
-        System.out.println(jornadesJson);
-        System.out.println(sizeJornades);
 
         utilsProject = new UtilsProject(context);
 

@@ -5,10 +5,9 @@ import android.content.Context;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.tfg_project.R;
 import com.tfg_project.controlador.AdminPage;
 import com.tfg_project.controlador.MenuPrincipal;
-import com.tfg_project.model.beans.Constants;
+import com.tfg_project.model.utils.Constants;
 import com.tfg_project.model.beans.LoadingDialog;
 
 import java.util.HashMap;
@@ -64,7 +63,6 @@ public class FirebaseOperationsLoginPage extends FirebaseOperations {
             } else {
                 LoadingDialog.getInstance(activity).dissmisDialog();
                 LoadingDialog.getInstance(activity).eliminateLoadingDialog();
-                //Log.w(TAG, "signInWithEmail:failure", task.getException());
                 super.getUtilsProject().makeToast("L'usuari i contrasenya especificats no corresponen a cap usuari de l'aplicació");
             }
         });
@@ -72,9 +70,7 @@ public class FirebaseOperationsLoginPage extends FirebaseOperations {
 
     public void sendPasswordResetEmail(String email){
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
-            super.getUtilsProject().makeToast("S'ha enviat un correu electrònic a l'adreça electrònica per tal de recuperar la contrasenya.");
-        });
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> super.getUtilsProject().makeToast("S'ha enviat un correu electrònic a l'adreça electrònica per tal de recuperar la contrasenya."));
     }
 
 

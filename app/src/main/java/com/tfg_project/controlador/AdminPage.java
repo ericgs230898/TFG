@@ -1,6 +1,7 @@
 package com.tfg_project.controlador;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,11 +27,7 @@ import java.util.Map;
 public class AdminPage extends AppCompatActivity {
 
     private static final String TAG = "ADMIN_PAGE_TAG";
-
-    private Button bPuntuarJornades, bPuntuarPlantilles, bNousPartits, bNousJugadors, bCanviarPuntuacions;
-    private UtilsProject utilsProject;
     private AlertDialog alertDialogTancarApp;
-
 
     @Override
     public void onBackPressed(){
@@ -42,12 +39,12 @@ public class AdminPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_page);
 
-        utilsProject = new UtilsProject(this);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        UtilsProject utilsProject = new UtilsProject(this);
 
         ImageButton ibBackButton = findViewById(R.id.ibBackButtonAdminPage);
-        ibBackButton.setOnClickListener(view -> {
-            alertDialogTancarApp.show();
-        });
+        ibBackButton.setOnClickListener(view -> alertDialogTancarApp.show());
 
         AlertDialog.Builder builderBack = new AlertDialog.Builder(this);
         builderBack.setMessage("Vols tancar l'aplicació?")
@@ -67,22 +64,20 @@ public class AdminPage extends AppCompatActivity {
             utilsProject.goToAnotherActivity(LoginPage.class, null);
         });
 
-        bNousJugadors = findViewById(R.id.bAdminJugadorsNous);
-        bNousPartits = findViewById(R.id.bAdminPartitsNous);
-        bPuntuarJornades = findViewById(R.id.bAdminPuntuarJornades);
-        bPuntuarPlantilles = findViewById(R.id.bAdminPuntuarPlantilles);
-        bCanviarPuntuacions = findViewById(R.id.bAdminCanviarPuntuacions);
+        Button bNousJugadors = findViewById(R.id.bAdminJugadorsNous);
+        Button bNousPartits = findViewById(R.id.bAdminPartitsNous);
+        Button bPuntuarJornades = findViewById(R.id.bAdminPuntuarJornades);
+        Button bPuntuarPlantilles = findViewById(R.id.bAdminPuntuarPlantilles);
+        Button bCanviarPuntuacions = findViewById(R.id.bAdminCanviarPuntuacions);
 
         bNousPartits.setOnClickListener(view -> {
             ServicePartits servicePartits = new ServicePartits();
-            //servicePartits.ejecutar();
             utilsProject.makeToast(getString(R.string.bolcant_nous_partits));
         });
 
         bNousJugadors.setOnClickListener(view -> {
             ServicePartitsJugadors servicePartitsJugadors = new ServicePartitsJugadors();
             utilsProject.makeToast(getString(R.string.bolcant_nous_jugadors));
-            //servicePartitsJugadors.ejecutar("","","","");
         });
 
         bPuntuarJornades.setOnClickListener(view -> {

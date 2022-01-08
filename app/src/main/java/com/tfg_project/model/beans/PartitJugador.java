@@ -16,10 +16,6 @@ public class PartitJugador {
     private int minutInici;
     private int minutFi;
 
-    public PartitJugador() {
-
-    }
-
     public PartitJugador(String nomJugador, String equipLocal, String equipVisitant,
                          int golesMarcados, int golesMarcadosPropiaPuerta, int golesMarcadosPenalti,
                          int golesEncajados, boolean tarjetaAmarilla1, boolean tarjetaAmarilla2,
@@ -44,16 +40,9 @@ public class PartitJugador {
     public void augmentaGolesEncajados(){
         this.golesEncajados++;
     }
-    public void disminuyeGolesEncajados(){
-        this.golesEncajados--;
-    }
 
     public int getGolesEncajados() {
         return golesEncajados;
-    }
-
-    public void setGolesEncajados(int golesEncajados) {
-        this.golesEncajados = golesEncajados;
     }
 
     public int getMinutInici() {
@@ -76,32 +65,16 @@ public class PartitJugador {
         return nomJugador;
     }
 
-    public void setNomJugador(String nomJugador) {
-        this.nomJugador = nomJugador;
-    }
-
     public String getEquipLocal() {
         return equipLocal;
-    }
-
-    public void setEquipLocal(String equipLocal) {
-        this.equipLocal = equipLocal;
     }
 
     public String getEquipVisitant() {
         return equipVisitant;
     }
 
-    public void setEquipVisitant(String equipVisitant) {
-        this.equipVisitant = equipVisitant;
-    }
-
     public int getGolesMarcados() {
         return golesMarcados;
-    }
-
-    public void setGolesMarcados(int golesMarcados) {
-        this.golesMarcados = golesMarcados;
     }
 
     public void augmentaGolesMarcados(){
@@ -112,20 +85,12 @@ public class PartitJugador {
         return golesMarcadosPropiaPuerta;
     }
 
-    public void setGolesMarcadosPropiaPuerta(int golesMarcadosPropiaPuerta) {
-        this.golesMarcadosPropiaPuerta = golesMarcadosPropiaPuerta;
-    }
-
     public void augmentaGolesPropiaPuerta(){
         this.golesMarcadosPropiaPuerta++;
     }
 
     public int getGolesMarcadosPenalti() {
         return golesMarcadosPenalti;
-    }
-
-    public void setGolesMarcadosPenalti(int golesMarcadosPenalti) {
-        this.golesMarcadosPenalti = golesMarcadosPenalti;
     }
 
     public void augmentaGolesPenalti(){
@@ -158,10 +123,6 @@ public class PartitJugador {
 
     public boolean isPortero() {
         return portero;
-    }
-
-    public void setPortero(boolean portero) {
-        this.portero = portero;
     }
 
     public boolean isPorteriaA0() {
