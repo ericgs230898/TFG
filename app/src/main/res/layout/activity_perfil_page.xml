@@ -41,7 +41,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        app:srcCompat="?attr/homeAsUpIndicator"
+        android:contentDescription="TODO" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"

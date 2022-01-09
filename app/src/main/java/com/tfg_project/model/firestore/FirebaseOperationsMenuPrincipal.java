@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
     private static final String LLIGUES_VIRTUALS = "LliguesVirtuals";
@@ -36,8 +37,8 @@ public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
     }
 
     public Task<DocumentSnapshot> getLliguesUsuari (){
-        return super.getFirebaseFirestore().collection("UsuariLligaVirtual").document(super.getFirebaseAuth().getCurrentUser().getEmail()).get().addOnCompleteListener(task -> {
-            listLliguesUsuari = (ArrayList<String>) task.getResult().get("Lligues");
+        return super.getFirebaseFirestore().collection("UsuariLligaVirtual").document(Objects.requireNonNull(super.getFirebaseAuth().getCurrentUser().getEmail())).get().addOnCompleteListener(task -> {
+            listLliguesUsuari = (ArrayList<String>) Objects.requireNonNull(task.getResult()).get("Lligues");
             if (listLliguesUsuari == null){
                 listLliguesUsuari = Collections.emptyList();
             }
@@ -48,7 +49,7 @@ public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
         return super.getFirebaseFirestore().collection(LLIGUES_VIRTUALS).document(nomLlVirtual).get().addOnCompleteListener(task -> {
             if ( task.isSuccessful() ) {
                 final DocumentSnapshot documentSnapshot = task.getResult();
-                final String competicio = (String) documentSnapshot.get(COMPETICIO);
+                final String competicio = (String) Objects.requireNonNull(documentSnapshot).get(COMPETICIO);
                 final String grup = (String) documentSnapshot.get("grup");
                 final  ArrayList<String> participants = (ArrayList<String>) documentSnapshot.get("usuaris");
                 if ( participants != null ) {
@@ -63,7 +64,7 @@ public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
         return super.getFirebaseFirestore().collection(LLIGUES_VIRTUALS).document(nomLligaVirtual).get().addOnCompleteListener(task -> {
             if ( task.isSuccessful() ) {
                 DocumentSnapshot documentSnapshot = task.getResult();
-                String passwordDB = (String) documentSnapshot.get("password");
+                String passwordDB = (String) Objects.requireNonNull(documentSnapshot).get("password");
                 if (password.equals(passwordDB)){
                     super.getUtilsProject().makeToast("Has sigut afegit a la lliga virtual!");
                     lliguesVirtualsUsuariList.add(new LliguesVirtuals(nomLligaVirtual, String.valueOf(lliguesVirtualsUsuariList.size()+1), (String) documentSnapshot.get(COMPETICIO), (String) documentSnapshot.get("grup")));
@@ -79,10 +80,10 @@ public class FirebaseOperationsMenuPrincipal extends FirebaseOperations {
     }
 
     public List<Task<Void>> putNewUserToLligaVirtual(String nomLligaVirtual, boolean lligaVirtualNova, Map<String, Object> map) {
-        String email = super.getFirebaseAuth().getCurrentUser().getEmail();
+        String email = Objects.requireNonNull(super.getFirebaseAuth().getCurrentUser()).getEmail();
         List<Task<Void>> tasks = new ArrayList<>();
         // equal
-        DocumentReference documentReference = super.getFirebaseFirestore().collection("UsuariLligaVirtual").document(email);
+        DocumentReference documentReference = super.getFirebaseFirestore().collection("UsuariLligaVirtual").document(Objects.requireNonNull(email));
         tasks.add(documentReference.update("Lligues", FieldValue.arrayUnion(nomLligaVirtual)).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
                 Log.d("TAG","CORRECT");

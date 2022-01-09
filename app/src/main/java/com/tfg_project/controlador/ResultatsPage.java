@@ -108,7 +108,7 @@ public class ResultatsPage extends AppCompatActivity {
                                     tvResultat.setText(getString(R.string.no_jugat));
                                     break;
                                 case "-":
-                                    tvResultat.setText(new StringBuilder().append(resultat.getGolesLocal()).append("-").append(resultat.getGolesVisitant()).toString());
+                                    tvResultat.setText(resultat.getGolesLocal() + "-" + resultat.getGolesVisitant());
                                     break;
                                 case DESCANS:
                                     tvResultat.setText(DESCANS);

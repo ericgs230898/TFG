@@ -40,7 +40,8 @@
       app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
       app:layout_constraintStart_toStartOf="@+id/toolbar2"
       app:layout_constraintTop_toTopOf="@+id/toolbar2"
-      app:srcCompat="?attr/actionModeCloseDrawable" />
+      app:srcCompat="?attr/actionModeCloseDrawable"
+      android:contentDescription="TODO" />
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recyclerViewPuntuacions"

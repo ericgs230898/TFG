@@ -22,8 +22,8 @@ public class FirebaseOperationsLoginPage extends FirebaseOperations {
 
     // LOGIN PAGE
     public void getUsername() {
-        super.getFirebaseFirestore().collection(Constants.USUARI).document(super.getFirebaseAuth().getCurrentUser().getEmail()).get().addOnCompleteListener(task -> {
-            String usuari = (String) task.getResult().get(Constants.USUARI_LOWERCASE);
+        super.getFirebaseFirestore().collection(Constants.USUARI).document(Objects.requireNonNull(super.getFirebaseAuth().getCurrentUser().getEmail())).get().addOnCompleteListener(task -> {
+            String usuari = (String) Objects.requireNonNull(task.getResult()).get(Constants.USUARI_LOWERCASE);
             Map<String, String> mapGoTo = new HashMap<>();
             mapGoTo.put(Constants.EMAIL, super.getFirebaseAuth().getCurrentUser().getEmail());
             mapGoTo.put(Constants.USERNAME, usuari);
@@ -45,7 +45,7 @@ public class FirebaseOperationsLoginPage extends FirebaseOperations {
                     }
                     else {
                         FirebaseFirestore.getInstance().collection(Constants.USUARI).document(email).get().addOnCompleteListener(task1 -> {
-                            String usuari = (String) task1.getResult().get(Constants.USUARI_LOWERCASE);
+                            String usuari = (String) Objects.requireNonNull(task1.getResult()).get(Constants.USUARI_LOWERCASE);
                             Map<String, String> mapGoTo = new HashMap<>();
                             mapGoTo.put(Constants.EMAIL, email);
                             mapGoTo.put(Constants.USERNAME, usuari);

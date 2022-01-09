@@ -3,17 +3,18 @@ package com.tfg_project.model.services;
 import com.tfg_project.model.beans.Partit;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ServicePartitsFCF {
 
-    private final static List<String> competicions = Arrays.asList("quarta-catalana");
+    private final static List<String> competicions = Collections.singletonList("quarta-catalana");
     private final static List<String> jornades = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
                                                         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                                                         "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
                                                         "31", "32", "33", "34", "35", "36", "37", "38", "39", "40");
 
-    private static final List<String> grups = Arrays.asList("1");
+    private static final List<String> grups = Collections.singletonList("1");
 
     private final String linea = "<tr class=\"linia\">";
     private final String resultatLink = "<div class=\"tc fs-17 white bg-darkgrey p-r\">";
@@ -116,8 +117,8 @@ public class ServicePartitsFCF {
                 int indexGuion = result.indexOf('-');
                 String golesLocal = result.substring(0, indexGuion);
                 String golesVisitante = result.substring(indexGuion+1);
-                partit.setGolesLocal(Integer.valueOf(golesLocal.trim()));
-                partit.setGolesVisitante(Integer.valueOf(golesVisitante.trim()));
+                partit.setGolesLocal(Integer.parseInt(golesLocal.trim()));
+                partit.setGolesVisitante(Integer.parseInt(golesVisitante.trim()));
                 int actaIndex = string.indexOf(actaLink1);
                 String actaLink = getActa(string, actaIndex);
                 partit.setActa(actaLink);

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/egsole/Documents/TFG_Project/app/src/main/res/layout/activity_menu_lliga_virtual.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/egsole/Documents/TFG_Project/app/src/main/res/layout/linear_layout_433.xml" value="0.20572916666666666" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

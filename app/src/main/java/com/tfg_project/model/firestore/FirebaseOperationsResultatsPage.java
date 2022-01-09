@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class FirebaseOperationsResultatsPage extends FirebaseOperations {
-    private List<PartitJugador> jugadorsLocal;
-    private List<PartitJugador> jugadorsVisitant;
+    private final List<PartitJugador> jugadorsLocal;
+    private final List<PartitJugador> jugadorsVisitant;
     public FirebaseOperationsResultatsPage(Context context) {
         super(context);
         jugadorsLocal = new ArrayList<>();
@@ -77,21 +77,21 @@ public class FirebaseOperationsResultatsPage extends FirebaseOperations {
                 .collection("Partits")
                 .document(equipLocal + "-" + equipVisitant);
         return doc.collection("JugadorsVisitant").get().addOnCompleteListener(task -> {
-            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+            for (DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult()).getDocuments()) {
                 String nomJugador = documentSnapshot.getId();
                 String docEquipLocal = (String) documentSnapshot.get("EquipLocal");
                 String docEquipVisitant = (String) documentSnapshot.get("EquipVisitant");
-                int golesMarcados = ((Long) documentSnapshot.get("GolesMarcados")).intValue();
-                int golesMarcadosPenalti = ((Long) documentSnapshot.get("GolesMarcadosPenalti")).intValue();
-                int golesMarcadosPropiaPuerta = ((Long) documentSnapshot.get("GolesMarcadosPropiaPuerta")).intValue();
+                int golesMarcados = ((Long) Objects.requireNonNull(documentSnapshot.get("GolesMarcados"))).intValue();
+                int golesMarcadosPenalti = ((Long) Objects.requireNonNull(documentSnapshot.get("GolesMarcadosPenalti"))).intValue();
+                int golesMarcadosPropiaPuerta = ((Long) Objects.requireNonNull(documentSnapshot.get("GolesMarcadosPropiaPuerta"))).intValue();
                 int golesEncajados = 0;
                 try {
-                    golesEncajados = ((Long) documentSnapshot.get("GolesEncajados")).intValue();
+                    golesEncajados = ((Long) Objects.requireNonNull(documentSnapshot.get("GolesEncajados"))).intValue();
                 } catch (Exception e) {
                     Log.e("TAG", e.getMessage());
                 }
-                int minutInici = ((Long) documentSnapshot.get("MinutInici")).intValue();
-                int minutFinal = ((Long) documentSnapshot.get("MinutFi")).intValue();
+                int minutInici = ((Long) Objects.requireNonNull(documentSnapshot.get("MinutInici"))).intValue();
+                int minutFinal = ((Long) Objects.requireNonNull(documentSnapshot.get("MinutFi"))).intValue();
                 boolean porteriaA0 = (Boolean) documentSnapshot.get("PorteriaA0");
                 boolean portero = (Boolean) documentSnapshot.get("Portero");
                 boolean amarilla1 = (Boolean) documentSnapshot.get("TarjetaAmarilla1");

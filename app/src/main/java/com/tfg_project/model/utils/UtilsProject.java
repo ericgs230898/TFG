@@ -33,7 +33,7 @@ public class UtilsProject {
     public static boolean isValidPassword(String s) {
         Pattern passwordPattern
                 = Pattern.compile(
-                "[a-zA-Z0-9\\!\\@\\#\\$]{8,24}");
+                "[a-zA-Z0-9!@#$]{8,24}");
 
         return TextUtils.isEmpty(s) || !passwordPattern.matcher(s).matches();
     }

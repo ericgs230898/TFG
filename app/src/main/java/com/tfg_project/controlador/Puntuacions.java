@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Puntuacions extends AppCompatActivity {
 
@@ -66,7 +67,7 @@ public class Puntuacions extends AppCompatActivity {
         countJornades = 0;
         initializeVariables();
         LoadingDialog loadingDialog = LoadingDialog.getInstance(this);
-        String mail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String mail = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
         String nomLligaVirtual = this.getIntent().getStringExtra("nomLligaVirtual");
 
         Task<DocumentSnapshot> taskPuntuacionsJoc = firebaseOperationsPuntuacionsPage.getPuntuacionsJoc();
@@ -77,7 +78,7 @@ public class Puntuacions extends AppCompatActivity {
         loadingDialog.startLoadingDialog();
         FirebaseFirestore.getInstance().collection("LliguesVirtuals").document(nomLligaVirtual)
                 .collection("Jornada").get().addOnCompleteListener(task -> {
-            if (task.getResult().getDocuments().isEmpty()) {
+            if (Objects.requireNonNull(task.getResult()).getDocuments().isEmpty()) {
                 loadingDialog.dissmisDialog();
                 utilsProject.makeToast("No hi ha cap puntuació guardada");
             }
@@ -85,13 +86,13 @@ public class Puntuacions extends AppCompatActivity {
                 for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                 int sizeJornades = task.getResult().getDocuments().size();
                 String jornada = doc.getId();
-                doc.getReference().collection(mail).document("Plantilla").get().addOnCompleteListener(task1 -> {
-                    if ((boolean) task1.getResult().get("puntuat")) {
+                doc.getReference().collection(Objects.requireNonNull(mail)).document("Plantilla").get().addOnCompleteListener(task1 -> {
+                    if ((boolean) Objects.requireNonNull(task1.getResult()).get("puntuat")) {
                         jornadesPossibles.add(jornada);
                         String alineacio = (String) task1.getResult().get("alineacio");
                         List<JugadorPuntuacio> jugadorPuntuacioList = new ArrayList<>();
                         doc.getReference().collection(mail).document("Plantilla").collection("Jugadors").get().addOnCompleteListener(task2 -> {
-                            for (DocumentSnapshot doc1 : task2.getResult().getDocuments()) {
+                            for (DocumentSnapshot doc1 : Objects.requireNonNull(task2.getResult()).getDocuments()) {
                                 String punts = (String) doc1.get("punts");
                                 String posicio = (String) doc1.get("posicio");
                                 String nomJugador = doc1.getId();
@@ -167,9 +168,7 @@ public class Puntuacions extends AppCompatActivity {
         Collections.sort(jornadesPossibles, (s, t1) -> {
             int num1 = Integer.parseInt(s.substring(8));
             int num2 = Integer.parseInt(t1.substring(8));
-            if ( num1 < num2 ) return -1;
-            else if ( num1 == num2) return 0;
-            else return 1;
+            return Integer.compare(num1, num2);
         });
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, jornadesPossibles);
         spinner.setAdapter(spinnerArrayAdapter);
@@ -178,26 +177,26 @@ public class Puntuacions extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String jornada = jornadesPossibles.get(i);
                 AlineacioJugadorPuntuacio alineacioJugadorPuntuacio = mapPuntuacions.get(jornada);
-                tvAlineacio.setText(new StringBuilder().append("Alineacio: ").append(alineacioJugadorPuntuacio.getAlineacio()).toString());
+                tvAlineacio.setText("Alineacio: " + Objects.requireNonNull(alineacioJugadorPuntuacio).getAlineacio());
                 String puntuacio = getPuntuacioTotal(alineacioJugadorPuntuacio.getJugadorPuntuacioList());
-                tvPuntuacio.setText(new StringBuilder().append("Punts totals: ").append(puntuacio.replace(",", ".")).toString());
+                tvPuntuacio.setText("Punts totals: " + puntuacio.replace(",", "."));
                 List<JugadorPuntuacio> listJugadors = alineacioJugadorPuntuacio.getJugadorPuntuacioList();
                 Collections.sort(listJugadors, (jugadorPuntuacio, t1) -> {
-                    if (jugadorPuntuacio.getPosicio().equals("POR")){
-                        return -1;
-                    } else if ( jugadorPuntuacio.getPosicio().equals("DFC")){
-                        if (t1.getPosicio().equals("MC") || t1.getPosicio().equals("DC")) return -1;
-                        else if ( t1.getPosicio().equals("DFC")) return 0;
-                        else return 1;
-                    }
-                    else if ( jugadorPuntuacio.getPosicio().equals("MC")){
-                        if (t1.getPosicio().equals("DC")) return -1;
-                        else if ( t1.getPosicio().equals("MC")) return 0;
-                        else return 1;
-                    }
-                    else if ( jugadorPuntuacio.getPosicio().equals("DC")){
-                        if (t1.getPosicio().equals("DC")) return 0;
-                        else return 1;
+                    switch (jugadorPuntuacio.getPosicio()) {
+                        case "POR":
+                            return -1;
+                        case "DFC":
+                            if (t1.getPosicio().equals("MC") || t1.getPosicio().equals("DC"))
+                                return -1;
+                            else if (t1.getPosicio().equals("DFC")) return 0;
+                            else return 1;
+                        case "MC":
+                            if (t1.getPosicio().equals("DC")) return -1;
+                            else if (t1.getPosicio().equals("MC")) return 0;
+                            else return 1;
+                        case "DC":
+                            if (t1.getPosicio().equals("DC")) return 0;
+                            else return 1;
                     }
                     return 0;
                 });

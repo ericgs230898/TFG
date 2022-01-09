@@ -34,7 +34,7 @@ public class JugadorResultatAdapter extends RecyclerView.Adapter<JugadorResultat
 
         View jugadorsResultatView = inflater.inflate(R.layout.linear_layout_jugador_partit, parent, false);
 
-        return new JugadorResultatAdapter.ViewHolder(jugadorsResultatView);
+        return new ViewHolder(jugadorsResultatView);
     }
 
     @Override
@@ -90,9 +90,9 @@ public class JugadorResultatAdapter extends RecyclerView.Adapter<JugadorResultat
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNomJugador;
-        private LinearLayout linearLayout;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvNomJugador;
+        private final LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -63,7 +63,7 @@ public class ResultatsPartitPage extends AppCompatActivity {
         final Type listType = new TypeToken<List<PartitJugador>>(){}.getType();
         final List<PartitJugador> jugLocals = new Gson().fromJson(jugadorsLocal, listType);
         final List<PartitJugador> jugVisitants = new Gson().fromJson(jugadorsVisitant, listType);
-        titlePartit.setText(new StringBuilder().append(equipLocal).append(DOS_PUNTS).append(golesLocal).append(ENTER).append(equipVisitant).append(DOS_PUNTS).append(golesVisitant).toString());
+        titlePartit.setText(equipLocal + DOS_PUNTS + golesLocal + ENTER + equipVisitant + DOS_PUNTS + golesVisitant);
 
         final TextView tvLocal = findViewById(R.id.tvEquipLocalResultatPage);
         final TextView tvVisitant = findViewById(R.id.tvEquipVisitantResultatPage);
@@ -235,17 +235,17 @@ public class ResultatsPartitPage extends AppCompatActivity {
         tvVermelles = customLayout.findViewById(R.id.tvJugadorsVermelles);
         tvGolesEncajados = customLayout.findViewById(R.id.tvJugadorsGolesEncajados);
         tvNom.setText(pj.getNom());
-        tvMinuts.setText(new StringBuilder().append(getString(R.string.minuts_jugats)).append(DOS_PUNTS).append(pj.getMinutsJugats()).toString());
-        tvGols.setText(new StringBuilder().append(getString(R.string.gols_marcats)).append(DOS_PUNTS).append(pj.getGolesMarcados()).toString());
-        tvGolsPenal.setText(new StringBuilder().append(getString(R.string.gols_penal)).append(DOS_PUNTS).append(pj.getGolesMarcadosPenalti()).toString());
-        tvGolsPP.setText(new StringBuilder().append(getString(R.string.gols_propia)).append(DOS_PUNTS).append(pj.getGolesMarcadosPropia()).toString());
-        if ( pj.isPortero() ) tvGolesEncajados.setText(new StringBuilder().append(getString(R.string.gols_rebuts)).append(DOS_PUNTS).append(pj.getGolesEncajados()).toString());
+        tvMinuts.setText(getString(R.string.minuts_jugats) + DOS_PUNTS + pj.getMinutsJugats());
+        tvGols.setText(getString(R.string.gols_marcats) + DOS_PUNTS + pj.getGolesMarcados());
+        tvGolsPenal.setText(getString(R.string.gols_penal) + DOS_PUNTS + pj.getGolesMarcadosPenalti());
+        tvGolsPP.setText(getString(R.string.gols_propia) + DOS_PUNTS + pj.getGolesMarcadosPropia());
+        if ( pj.isPortero() ) tvGolesEncajados.setText(getString(R.string.gols_rebuts) + DOS_PUNTS + pj.getGolesEncajados());
         int grogues = 0;
         if ( pj.isTarjetaAmarilla1()) grogues++;
         if ( pj.isTarjetaAmarilla2()) grogues++;
-        tvGrogues.setText(new StringBuilder().append(getString(R.string.targetes_grogues)).append(DOS_PUNTS).append(grogues).toString());
-        if ( pj.isTarjetaRoja1() ) tvVermelles.setText(new StringBuilder().append(getString(R.string.targetes_vermelles)).append(DOS_PUNTS).append("1").toString());
-        else tvVermelles.setText(new StringBuilder().append(getString(R.string.targetes_vermelles)).append(DOS_PUNTS).append("0").toString());
+        tvGrogues.setText(getString(R.string.targetes_grogues) + DOS_PUNTS + grogues);
+        if ( pj.isTarjetaRoja1() ) tvVermelles.setText(getString(R.string.targetes_vermelles) + DOS_PUNTS + "1");
+        else tvVermelles.setText(getString(R.string.targetes_vermelles) + DOS_PUNTS + "0");
 
 
         builder.setView(customLayout);

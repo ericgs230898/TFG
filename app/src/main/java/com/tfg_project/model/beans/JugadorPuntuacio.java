@@ -1,9 +1,9 @@
 package com.tfg_project.model.beans;
 
 public class JugadorPuntuacio {
-    private String posicio;
-    private String nomJugador;
-    private String punts;
+    private final String posicio;
+    private final String nomJugador;
+    private final String punts;
 
     public JugadorPuntuacio(String posicio, String nomJugador, String punts) {
         this.posicio = posicio;

@@ -1,6 +1,5 @@
 package com.tfg_project.controlador;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -9,16 +8,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.tfg_project.R;
 import com.tfg_project.model.beans.ClassificacioBean;
@@ -128,7 +123,7 @@ public class MenuLligaVirtual extends AppCompatActivity {
             mapResultat.put("grup", grup);
             mapResultat.put(JORNADES_CONSTANT, "");
             FirebaseFirestore.getInstance().collection("PartitsJugats").document(comp).collection("Grups").document("grup" + grup).collection("Jornades").get().addOnCompleteListener(task -> {
-                mapResultat.put("sizeJornades", String.valueOf(task.getResult().getDocuments().size()));
+                mapResultat.put("sizeJornades", String.valueOf(Objects.requireNonNull(task.getResult()).getDocuments().size()));
                 List<DocumentSnapshot> documents = task.getResult().getDocuments();
                 executeForEachDocumentResultat(documents);
             });
@@ -144,7 +139,7 @@ public class MenuLligaVirtual extends AppCompatActivity {
         });
         ArrayList<ClassificacioBean> classificacioBeanArrayList = new ArrayList<>();
         FirebaseFirestore.getInstance().collection("LliguesVirtuals").document(nomLligaVirtual).collection("Classificacio").get().addOnCompleteListener(task -> {
-            int sizeDocs = task.getResult().getDocuments().size();
+            int sizeDocs = Objects.requireNonNull(task.getResult()).getDocuments().size();
             final int[] count = {0};
             for ( DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
                 String emailUser = documentSnapshot.getId();
@@ -153,21 +148,14 @@ public class MenuLligaVirtual extends AppCompatActivity {
                 df.setRoundingMode(RoundingMode.CEILING);
                 String puntsString = df.format(punts);
                 FirebaseFirestore.getInstance().collection("Usuari").document(emailUser).get().addOnCompleteListener(task1 -> {
-                    String username = (String) task1.getResult().get("usuari");
+                    String username = (String) Objects.requireNonNull(task1.getResult()).get("usuari");
                     classificacioBeanArrayList.add(new ClassificacioBean(username, puntsString));
                     count[0]++;
                     if ( count[0] == sizeDocs ){
                         Collections.sort(classificacioBeanArrayList, (c1, c2) -> {
-                            Double c1Double = Double.valueOf(c1.getPunts().replace(",","."));
-                            Double c2Double = Double.valueOf(c2.getPunts().replace(",","."));
-
-                            if ( c1Double > c2Double){
-                                return -1;
-                            }
-                            if ( c1Double < c2Double){
-                                return 1;
-                            }
-                            return 0;
+                            double c1Double = Double.parseDouble(c1.getPunts().replace(",", "."));
+                            double c2Double = Double.parseDouble(c2.getPunts().replace(",", "."));
+                            return Double.compare(c1Double, c2Double);
                         });
                         if ( classificacioBeanArrayList.size() > 3 ) {
                             ClassificacioAdapter adapter = new ClassificacioAdapter(classificacioBeanArrayList.subList(0,3));
@@ -192,34 +180,30 @@ public class MenuLligaVirtual extends AppCompatActivity {
     private void executeForEachDocumentResultat(List<DocumentSnapshot> documents) {
         final int[] count = {0};
         for (DocumentSnapshot doc : documents) {
-            doc.getReference().collection("Partits").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @SuppressLint("NewApi")
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task1) {
-                    List<Resultat> resultats = new ArrayList<>();
-                    for (DocumentSnapshot documentSnapshot1 : task1.getResult().getDocuments()) {
-                        String equipLocal = (String) documentSnapshot1.get("equipLocal");
-                        String equipVisitant = (String) documentSnapshot1.get("equipVisitant");
-                        int golesLocal = ((Long) Objects.requireNonNull(documentSnapshot1.get("golesLocal"))).intValue();
-                        int golesVisitant = ((Long) Objects.requireNonNull(documentSnapshot1.get("golesVisitante"))).intValue();
-                        String condicio = (String) documentSnapshot1.get("condicion");
-                        if ( condicio.equals("D")) {
-                            if ( equipLocal.equals("")) {
-                                equipLocal = "Descansa";
-                            }
-                            else equipVisitant = "Descansa";
+            doc.getReference().collection("Partits").get().addOnCompleteListener(task1 -> {
+                List<Resultat> resultats = new ArrayList<>();
+                for (DocumentSnapshot documentSnapshot1 : task1.getResult().getDocuments()) {
+                    String equipLocal = (String) documentSnapshot1.get("equipLocal");
+                    String equipVisitant = (String) documentSnapshot1.get("equipVisitant");
+                    int golesLocal = ((Long) Objects.requireNonNull(documentSnapshot1.get("golesLocal"))).intValue();
+                    int golesVisitant = ((Long) Objects.requireNonNull(documentSnapshot1.get("golesVisitante"))).intValue();
+                    String condicio = (String) documentSnapshot1.get("condicion");
+                    if ( condicio.equals("D")) {
+                        if ( equipLocal.equals("")) {
+                            equipLocal = "Descansa";
                         }
-                        resultats.add(new Resultat(equipLocal, equipVisitant, golesLocal, golesVisitant, condicio));
+                        else equipVisitant = "Descansa";
                     }
-                    jornades.add(new Jornada(doc.getId(), resultats));
-                    String json = new Gson().toJson(jornades);
-                    mapResultat.put(JORNADES_CONSTANT, json);
-                    count[0]++;
-                    if ( count[0] == documents.size()) {
-                        LoadingDialog.getInstance(activity).dissmisDialog();
-                        LoadingDialog.getInstance(activity).eliminateLoadingDialog();
-                        utilsProject.goToAnotherActivity(ResultatsPage.class, mapResultat);
-                    }
+                    resultats.add(new Resultat(equipLocal, equipVisitant, golesLocal, golesVisitant, condicio));
+                }
+                jornades.add(new Jornada(doc.getId(), resultats));
+                String json = new Gson().toJson(jornades);
+                mapResultat.put(JORNADES_CONSTANT, json);
+                count[0]++;
+                if ( count[0] == documents.size()) {
+                    LoadingDialog.getInstance(activity).dissmisDialog();
+                    LoadingDialog.getInstance(activity).eliminateLoadingDialog();
+                    utilsProject.goToAnotherActivity(ResultatsPage.class, mapResultat);
                 }
             });
         }
@@ -245,7 +229,7 @@ public class MenuLligaVirtual extends AppCompatActivity {
         mapResultat = new HashMap<>();
 
         tvNomLligaVirtual.setText(nomLligaVirtual);
-        tvCompeticioGrup.setText(new StringBuilder().append(competicio).append(" - Grup: ").append(grup).toString());
+        tvCompeticioGrup.setText(competicio + " - Grup: " + grup);
 
         recyclerViewClassificacio = findViewById(R.id.recyclerViewClassificacio);
         recyclerViewClassificacio2 = findViewById(R.id.recyclerViewClassificacio2);

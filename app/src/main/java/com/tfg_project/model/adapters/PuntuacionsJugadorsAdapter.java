@@ -25,7 +25,7 @@ public class PuntuacionsJugadorsAdapter extends RecyclerView.Adapter<Puntuacions
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.linear_layout_jugador_puntuacio, parent, false);
-        return new PuntuacionsJugadorsAdapter.ViewHolder(layoutView);
+        return new ViewHolder(layoutView);
     }
 
     @Override
@@ -43,10 +43,10 @@ public class PuntuacionsJugadorsAdapter extends RecyclerView.Adapter<Puntuacions
         return jugadorPuntuacioList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNomJugador;
-        private TextView tvPuntuacio;
-        private TextView tvPosicio;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvNomJugador;
+        private final TextView tvPuntuacio;
+        private final TextView tvPosicio;
 
         public ViewHolder(View view) {
             super(view);

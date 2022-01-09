@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Jornada implements Serializable {
-    private String jornada;
-    private List<Resultat> resultats;
+    private final String jornada;
+    private final List<Resultat> resultats;
 
     public Jornada(String jornada, List<Resultat> resultats) {
         this.jornada = jornada;

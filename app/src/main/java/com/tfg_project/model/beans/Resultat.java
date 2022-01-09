@@ -3,11 +3,11 @@ package com.tfg_project.model.beans;
 import java.io.Serializable;
 
 public class Resultat implements Serializable {
-    private String equipLocal;
-    private String equipVisitant;
-    private int golesLocal;
-    private int golesVisitant;
-    private String condicio;
+    private final String equipLocal;
+    private final String equipVisitant;
+    private final int golesLocal;
+    private final int golesVisitant;
+    private final String condicio;
 
     public Resultat(String equipLocal, String equipVisitant, int golesLocal, int golesVisitant, String condicio) {
         this.equipLocal = equipLocal;

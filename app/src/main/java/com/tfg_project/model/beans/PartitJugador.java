@@ -1,9 +1,9 @@
 package com.tfg_project.model.beans;
 
 public class PartitJugador {
-    private String nomJugador;
-    private String equipLocal;
-    private String equipVisitant;
+    private final String nomJugador;
+    private final String equipLocal;
+    private final String equipVisitant;
     private int golesMarcados;
     private int golesMarcadosPropiaPuerta;
     private int golesMarcadosPenalti;
@@ -11,7 +11,7 @@ public class PartitJugador {
     private boolean tarjetaAmarilla1;
     private boolean tarjetaAmarilla2;
     private boolean tarjetaRoja;
-    private boolean portero;
+    private final boolean portero;
     private boolean porteriaA0;
     private int minutInici;
     private int minutFi;

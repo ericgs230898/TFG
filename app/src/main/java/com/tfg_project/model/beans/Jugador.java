@@ -1,8 +1,8 @@
 package com.tfg_project.model.beans;
 
 public class Jugador {
-    String nomJugador;
-    String idEquip;
+    final String nomJugador;
+    final String idEquip;
 
     public Jugador(String nomJugador, String idEquip) {
         this.nomJugador = nomJugador;

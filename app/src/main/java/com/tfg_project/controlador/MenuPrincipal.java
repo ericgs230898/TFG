@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.tfg_project.R;
 import com.tfg_project.model.beans.LliguesVirtuals;
 import com.tfg_project.model.adapters.LliguesVirtualsAdapter;
@@ -31,16 +30,13 @@ import com.tfg_project.model.utils.UtilsProject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 public class MenuPrincipal extends AppCompatActivity {
-
-    private static final String GRUPS = "Grups";
-    private static final String JORNADES = "Jornades";
-
     private static final List<Integer> listGrupsCompeticions = Arrays.asList
             (R.array.grupsPrimeraCatalana, R.array.grupsSegonaCatalana,
                     R.array.grupsTerceraCatalana, R.array.grupsQuartaCatalana);
@@ -49,7 +45,6 @@ public class MenuPrincipal extends AppCompatActivity {
     private Button crearLligaVirtualButton;
     private Button unirLligaVirtualButton;
 
-    private FirebaseFirestore firebaseFirestore;
     private String emailUser;
     private AlertDialog alertDialogCrearLliga;
     private AlertDialog alertDialogUnirLliga;
@@ -306,7 +301,7 @@ public class MenuPrincipal extends AppCompatActivity {
             map.put("competicio", spinnerCompeticio.getSelectedItem().toString());
             map.put("grup", spinnerGrups.getSelectedItem().toString());
             map.put("maxParticipants", spinnerMaxParticipants.getSelectedItem().toString());
-            List<String> listUsuari = Arrays.asList(emailUser);
+            List<String> listUsuari = Collections.singletonList(emailUser);
             map.put("usuaris", listUsuari);
             List<Task<Void>> tasks = firebaseOperationsMenuPrincipal.putNewUserToLligaVirtual(nomLligaVirtual.getText().toString(), true, map);
             Tasks.whenAllComplete(tasks).addOnCompleteListener(task1 -> setAdapterLliguesVirtuals(firebaseOperationsMenuPrincipal.getLliguesVirtualsUsuariList()));
@@ -323,7 +318,6 @@ public class MenuPrincipal extends AppCompatActivity {
         accountButton = findViewById(R.id.accountButton);
         crearLligaVirtualButton = findViewById(R.id.bCrearLligaVirtual);
         unirLligaVirtualButton = findViewById(R.id.bUnirLligaVirtual);
-        firebaseFirestore = FirebaseFirestore.getInstance();
         emailUser = getIntent().getExtras().getString("email");
         username = getIntent().getExtras().getString("username");
 

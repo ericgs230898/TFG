@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class PlantillaPage extends AppCompatActivity {
@@ -207,7 +208,7 @@ public class PlantillaPage extends AppCompatActivity {
                 if (set.size() != jugadorGuardar.size()) utilsProject.makeToast("Hi ha algun jugador duplicat!" );
                 else {
                     utilsProject.makeToast("S'ha guardat la teva plantilla correctament!");
-                    String username = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                    String username = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
                     String jornada = (String) spinnerJornadesPossibles.getSelectedItem();
                     Map<String, Object> mapJugadors = new HashMap<>();
                     for (JugadorPosicio jugadorPosicio : jugadorGuardar) {
@@ -230,41 +231,56 @@ public class PlantillaPage extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String text = spinnerAlineacions.getSelectedItem().toString();
                 Log.i("INFO", text);
-                if ( text.equals(ALINEACIO_433)){
-                    List<String> jugadorsSelect = getJugadorsFromLinearLayout();
-                    linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_433);
-                    updatePlantilla(jugadorsSelect);
-                } else if ( text.equals(ALINEACIO_442) ){
-                    List<String> jugadorsSelect = getJugadorsFromLinearLayout();
-                    linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_442);
-                    updatePlantilla(jugadorsSelect);
-                } else if ( text.equals(ALINEACIO_451) ){
-                    List<String> jugadorsSelect = getJugadorsFromLinearLayout();
-                    linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_451);
-                    updatePlantilla(jugadorsSelect);
-                } else if ( text.equals(ALINEACIO_343) ){
-                    List<String> jugadorsSelect = getJugadorsFromLinearLayout();
-                    linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_343);
-                    updatePlantilla(jugadorsSelect);
-                } else if ( text.equals(ALINEACIO_352) ){
-                    List<String> jugadorsSelect = getJugadorsFromLinearLayout();
-                    linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_352);
-                    updatePlantilla(jugadorsSelect);
-                } else if ( text.equals(ALINEACIO_541) ){
-                    List<String> jugadorsSelect = getJugadorsFromLinearLayout();
-                    linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_541);
-                    updatePlantilla(jugadorsSelect);
-                } else if ( text.equals(ALINEACIO_532) ){
-                    List<String> jugadorsSelect = getJugadorsFromLinearLayout();
-                    linearLayoutAlineacio.removeAllViews();
-                    inflateLayout(R.layout.linear_layout_532);
-                    updatePlantilla(jugadorsSelect);
+                switch (text) {
+                    case ALINEACIO_433: {
+                        List<String> jugadorsSelect = getJugadorsFromLinearLayout();
+                        linearLayoutAlineacio.removeAllViews();
+                        inflateLayout(R.layout.linear_layout_433);
+                        updatePlantilla(jugadorsSelect);
+                        break;
+                    }
+                    case ALINEACIO_442: {
+                        List<String> jugadorsSelect = getJugadorsFromLinearLayout();
+                        linearLayoutAlineacio.removeAllViews();
+                        inflateLayout(R.layout.linear_layout_442);
+                        updatePlantilla(jugadorsSelect);
+                        break;
+                    }
+                    case ALINEACIO_451: {
+                        List<String> jugadorsSelect = getJugadorsFromLinearLayout();
+                        linearLayoutAlineacio.removeAllViews();
+                        inflateLayout(R.layout.linear_layout_451);
+                        updatePlantilla(jugadorsSelect);
+                        break;
+                    }
+                    case ALINEACIO_343: {
+                        List<String> jugadorsSelect = getJugadorsFromLinearLayout();
+                        linearLayoutAlineacio.removeAllViews();
+                        inflateLayout(R.layout.linear_layout_343);
+                        updatePlantilla(jugadorsSelect);
+                        break;
+                    }
+                    case ALINEACIO_352: {
+                        List<String> jugadorsSelect = getJugadorsFromLinearLayout();
+                        linearLayoutAlineacio.removeAllViews();
+                        inflateLayout(R.layout.linear_layout_352);
+                        updatePlantilla(jugadorsSelect);
+                        break;
+                    }
+                    case ALINEACIO_541: {
+                        List<String> jugadorsSelect = getJugadorsFromLinearLayout();
+                        linearLayoutAlineacio.removeAllViews();
+                        inflateLayout(R.layout.linear_layout_541);
+                        updatePlantilla(jugadorsSelect);
+                        break;
+                    }
+                    case ALINEACIO_532: {
+                        List<String> jugadorsSelect = getJugadorsFromLinearLayout();
+                        linearLayoutAlineacio.removeAllViews();
+                        inflateLayout(R.layout.linear_layout_532);
+                        updatePlantilla(jugadorsSelect);
+                        break;
+                    }
                 }
             }
 
@@ -288,40 +304,42 @@ public class PlantillaPage extends AppCompatActivity {
     }
 
     private int getLayoutValue(String alineacio) {
-        if (alineacio.equals(ALINEACIO_433)){
-            return R.layout.linear_layout_433;
-        } else if ( alineacio.equals(ALINEACIO_442)){
-            return R.layout.linear_layout_442;
-        } else if ( alineacio.equals(ALINEACIO_451)){
-            return R.layout.linear_layout_451;
-        } else if ( alineacio.equals(ALINEACIO_352)){
-            return R.layout.linear_layout_352;
-        } else if ( alineacio.equals(ALINEACIO_343)){
-            return R.layout.linear_layout_343;
-        } else if ( alineacio.equals(ALINEACIO_532)){
-            return R.layout.linear_layout_532;
-        } else if ( alineacio.equals(ALINEACIO_541)){
-            return R.layout.linear_layout_541;
-        } else{
-            return -1;
+        switch (alineacio) {
+            case ALINEACIO_433:
+                return R.layout.linear_layout_433;
+            case ALINEACIO_442:
+                return R.layout.linear_layout_442;
+            case ALINEACIO_451:
+                return R.layout.linear_layout_451;
+            case ALINEACIO_352:
+                return R.layout.linear_layout_352;
+            case ALINEACIO_343:
+                return R.layout.linear_layout_343;
+            case ALINEACIO_532:
+                return R.layout.linear_layout_532;
+            case ALINEACIO_541:
+                return R.layout.linear_layout_541;
+            default:
+                return -1;
         }
     }
 
     private static int getIndexAlineacio(String alineacio) {
-        if (alineacio.equals(ALINEACIO_433)){
-            return 0;
-        } else if ( alineacio.equals(ALINEACIO_442)){
-            return 1;
-        } else if ( alineacio.equals(ALINEACIO_451)){
-            return 2;
-        } else if ( alineacio.equals(ALINEACIO_352)){
-            return 3;
-        } else if ( alineacio.equals(ALINEACIO_343)){
-            return 4;
-        } else if ( alineacio.equals(ALINEACIO_532)){
-            return 5;
-        } else if ( alineacio.equals(ALINEACIO_541)){
-            return 6;
+        switch (alineacio) {
+            case ALINEACIO_433:
+                return 0;
+            case ALINEACIO_442:
+                return 1;
+            case ALINEACIO_451:
+                return 2;
+            case ALINEACIO_352:
+                return 3;
+            case ALINEACIO_343:
+                return 4;
+            case ALINEACIO_532:
+                return 5;
+            case ALINEACIO_541:
+                return 6;
         }
         return 1;
     }

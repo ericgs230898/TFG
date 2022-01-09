@@ -243,7 +243,7 @@ public class ServicePartitsJugadors {
             if ( textString.charAt(i) == '>') break;
             else if ( textString.charAt(i) != ' ' && textString.charAt(i) != '\t') stringBuilder.append(textString.charAt(i));
         }
-        return Integer.valueOf(stringBuilder.reverse().toString());
+        return Integer.parseInt(stringBuilder.reverse().toString());
     }
 
     private int getGolesVisitantes (int indexMarcador, String textString ) {
@@ -254,7 +254,7 @@ public class ServicePartitsJugadors {
             if ( textString.charAt(i) == '<' ) break;
             else if ( textString.charAt(i) != ' ' && textString.charAt(i) != '\t' ) stringBuilder.append(textString.charAt(i));
         }
-        return Integer.valueOf(stringBuilder.toString());
+        return Integer.parseInt(stringBuilder.toString());
     }
 
     private void getGols(String substring) {
@@ -293,39 +293,45 @@ public class ServicePartitsJugadors {
             }
             for ( int i=0; i<partitJugadorsLocal.size(); i++ ) {
                 if ( partitJugadorsLocal.get(i).getNomJugador().equals(jugador.toString())){
-                    if ( tipusGol.equals("golNormal")) {
-                        partitJugadorsLocal.get(i).augmentaGolesMarcados();
-                        minutsGolLocal.add(minutGol.reverse().toString());
-                    } else if ( tipusGol.equals("golPropia")) {
-                        partitJugadorsLocal.get(i).augmentaGolesPropiaPuerta();
-                        minutsGolVisitant.add(minutGol.reverse().toString());
-                    }
-                    else if ( tipusGol.equals("golPenal")) {
-                        partitJugadorsLocal.get(i).augmentaGolesPenalti();
-                        minutsGolLocal.add(minutGol.reverse().toString());
+                    switch (tipusGol) {
+                        case "golNormal":
+                            partitJugadorsLocal.get(i).augmentaGolesMarcados();
+                            minutsGolLocal.add(minutGol.reverse().toString());
+                            break;
+                        case "golPropia":
+                            partitJugadorsLocal.get(i).augmentaGolesPropiaPuerta();
+                            minutsGolVisitant.add(minutGol.reverse().toString());
+                            break;
+                        case "golPenal":
+                            partitJugadorsLocal.get(i).augmentaGolesPenalti();
+                            minutsGolLocal.add(minutGol.reverse().toString());
+                            break;
                     }
                 }
             }
 
             for ( int i=0; i<partitJugadorsVisitant.size(); i++ ) {
                 if ( partitJugadorsVisitant.get(i).getNomJugador().equals(jugador.toString())){
-                    if ( tipusGol.equals("golNormal")) {
-                        partitJugadorsVisitant.get(i).augmentaGolesMarcados();
-                        minutsGolVisitant.add(minutGol.reverse().toString());
-                    } else if ( tipusGol.equals("golPropia")) {
-                        partitJugadorsVisitant.get(i).augmentaGolesPropiaPuerta();
-                        minutsGolLocal.add(minutGol.reverse().toString());
-                    }
-                    else if ( tipusGol.equals("golPenal")) {
-                        partitJugadorsVisitant.get(i).augmentaGolesPenalti();
-                        minutsGolVisitant.add(minutGol.reverse().toString());
+                    switch (tipusGol) {
+                        case "golNormal":
+                            partitJugadorsVisitant.get(i).augmentaGolesMarcados();
+                            minutsGolVisitant.add(minutGol.reverse().toString());
+                            break;
+                        case "golPropia":
+                            partitJugadorsVisitant.get(i).augmentaGolesPropiaPuerta();
+                            minutsGolLocal.add(minutGol.reverse().toString());
+                            break;
+                        case "golPenal":
+                            partitJugadorsVisitant.get(i).augmentaGolesPenalti();
+                            minutsGolVisitant.add(minutGol.reverse().toString());
+                            break;
                     }
                 }
             }
             indexGol = indexNextGol;
         }
         for ( String minutGol : minutsGolLocal ) {
-            int minutGolInteger = Integer.valueOf(minutGol);
+            int minutGolInteger = Integer.parseInt(minutGol);
             for ( PartitJugador pj : partitJugadorsLocal ) {
                 if ( pj.getMinutInici() != -1 ) {
                     if ( pj.getMinutFi() == -1 ) {
@@ -379,7 +385,7 @@ public class ServicePartitsJugadors {
             }
             for ( int i=0; i<partitJugadorsLocal.size(); i++ ) {
                 if ( partitJugadorsLocal.get(i).getNomJugador().equals(jugador.toString())){
-                    if ( tarjeta == "roja" ) {
+                    if (tarjeta.equals("roja")) {
                         partitJugadorsLocal.get(i).setTarjetaRoja(true);
                     } else {
                         if (partitJugadorsLocal.get(i).isTarjetaAmarilla1()) {
@@ -392,7 +398,7 @@ public class ServicePartitsJugadors {
             }
             for ( int i=0; i<partitJugadorsVisitant.size(); i++ ) {
                 if ( partitJugadorsVisitant.get(i).getNomJugador().equals(jugador.toString())){
-                    if ( tarjeta == "roja" ) {
+                    if (tarjeta.equals("roja")) {
                         partitJugadorsVisitant.get(i).setTarjetaRoja(true);
                     } else {
                         if (partitJugadorsVisitant.get(i).isTarjetaAmarilla1()) {
@@ -432,7 +438,7 @@ public class ServicePartitsJugadors {
                 else if ( substring.charAt(i) == '<' && trobat2 ) break;
             }
             String minutString = minutSub.toString();
-            int minut = Integer.valueOf(minutString.substring(0, minutString.length()-1));
+            int minut = Integer.parseInt(minutString.substring(0, minutString.length()-1));
             for ( int i=0; i<partitJugadorsLocal.size(); i++ ) {
                 if ( partitJugadorsLocal.get(i).getNomJugador().equals(jugador1.toString())){
                     partitJugadorsLocal.get(i).setMinutFi(minut);

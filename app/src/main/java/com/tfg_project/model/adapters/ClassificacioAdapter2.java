@@ -31,7 +31,7 @@ public class ClassificacioAdapter2 extends
 
         View classificacioView = inflater.inflate(R.layout.linear_layout_classificacio2, parent, false);
 
-        return new ClassificacioAdapter2.ViewHolder(classificacioView);
+        return new ViewHolder(classificacioView);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ClassificacioAdapter2 extends
         return classificacioAdapterList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvNomUsuari;
         private final TextView tvPuntsUsuari;
         private final TextView tvPosicio;

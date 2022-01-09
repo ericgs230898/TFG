@@ -13,6 +13,7 @@ import com.tfg_project.controlador.LoginPage;
 import com.tfg_project.model.utils.Constants;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FirebaseOperationsPerfilPage extends FirebaseOperations {
     private String usuari;
@@ -25,18 +26,18 @@ public class FirebaseOperationsPerfilPage extends FirebaseOperations {
     }
 
     public Task<DocumentSnapshot> getUsername(){
-        return super.getFirebaseFirestore().collection(Constants.USUARI).document(super.getFirebaseAuth().getCurrentUser().getEmail()).get().addOnCompleteListener(task -> usuari = (String) task.getResult().get("usuari"));
+        return super.getFirebaseFirestore().collection(Constants.USUARI).document(Objects.requireNonNull(super.getFirebaseAuth().getCurrentUser().getEmail())).get().addOnCompleteListener(task -> usuari = (String) Objects.requireNonNull(task.getResult()).get("usuari"));
     }
     public void modificaDadesUsuari(String newUsername){
-        super.getFirebaseFirestore().collection("Usuari").document(super.getFirebaseAuth().getCurrentUser().getEmail()).update("usuari", newUsername).addOnCompleteListener(task -> super.getUtilsProject().makeToast("Dades modificades correctament."));
+        super.getFirebaseFirestore().collection("Usuari").document(Objects.requireNonNull(super.getFirebaseAuth().getCurrentUser().getEmail())).update("usuari", newUsername).addOnCompleteListener(task -> super.getUtilsProject().makeToast("Dades modificades correctament."));
     }
 
     public void eliminaUsuari(){
-        String mail = super.getFirebaseAuth().getCurrentUser().getEmail();
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("UsuariLligaVirtual").document(mail);
+        String mail = Objects.requireNonNull(super.getFirebaseAuth().getCurrentUser()).getEmail();
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("UsuariLligaVirtual").document(Objects.requireNonNull(mail));
         documentReference.get().addOnCompleteListener(task -> {
-            List<String> lliguesUsuari = (List<String>) task.getResult().get("Lligues");
-            int size = lliguesUsuari.size();
+            List<String> lliguesUsuari = (List<String>) Objects.requireNonNull(task.getResult()).get("Lligues");
+            int size = Objects.requireNonNull(lliguesUsuari).size();
             final int[] count = {0};
             for ( String lligaUsuari : lliguesUsuari ) {
                 FirebaseFirestore.getInstance().collection("LliguesVirtuals").document(lligaUsuari).update("usuaris", FieldValue.arrayRemove(mail)).addOnCompleteListener(task14 -> {
@@ -47,7 +48,7 @@ public class FirebaseOperationsPerfilPage extends FirebaseOperations {
                             Log.d("TAG", "Usuari eliminat de les lligues virtuals2");
                             FirebaseFirestore.getInstance().collection("Usuari").document(mail).delete().addOnCompleteListener(task12 -> {
                                 Log.d("TAG", "Usuari eliminat");
-                                FirebaseAuth.getInstance().getCurrentUser().delete().addOnCompleteListener(task1 -> {
+                                Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).delete().addOnCompleteListener(task1 -> {
                                     Log.d("TAG","Usuari eliminat FIREBASE AUTH");
                                     super.getUtilsProject().goToAnotherActivity(LoginPage.class, null);
                                 });

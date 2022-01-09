@@ -12,16 +12,17 @@ import com.tfg_project.model.beans.Jugador;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class FirebaseOperationsPlantillaPage extends FirebaseOperations {
     private final static String LLIGUES_VIRTUALS = "LliguesVirtuals";
     private final static String JORNADA = "Jornada";
-    private List<String> jornades;
-    private List<JornadaData> jornadesData;
+    private final List<String> jornades;
+    private final List<JornadaData> jornadesData;
     private Map<String, Object> map;
-    private List<String> equips;
-    private List<String> jugadors;
-    private List<Jugador> jugadorsEquip;
+    private final List<String> equips;
+    private final List<String> jugadors;
+    private final List<Jugador> jugadorsEquip;
 
 
     public FirebaseOperationsPlantillaPage(Context context) {
@@ -58,7 +59,7 @@ public class FirebaseOperationsPlantillaPage extends FirebaseOperations {
                 .collection("Grups").document(grup).collection("Jornades")
                 .get().addOnCompleteListener(task -> {
                     List<JornadaData> jornadaDataAux = new ArrayList<>();
-                    for ( DocumentSnapshot documentSnapshot : task.getResult().getDocuments() ) {
+                    for ( DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult()).getDocuments() ) {
                         String jornada = documentSnapshot.getId();
                         jornada = jornada.substring(7);
                         jornadaDataAux.add(new JornadaData("Jornada " + jornada,
@@ -81,14 +82,14 @@ public class FirebaseOperationsPlantillaPage extends FirebaseOperations {
     public Task<DocumentSnapshot> getJugadorsDisponibles(String nomLligaVirtual, String jornada){
         return FirebaseFirestore.getInstance().collection(LLIGUES_VIRTUALS).document(nomLligaVirtual)
                 .collection(JORNADA).document(jornada)
-                .collection(super.getFirebaseAuth().getCurrentUser().getEmail()).document("Plantilla").get().addOnCompleteListener(task ->
-            map = task.getResult().getData());
+                .collection(Objects.requireNonNull(Objects.requireNonNull(super.getFirebaseAuth().getCurrentUser()).getEmail())).document("Plantilla").get().addOnCompleteListener(task ->
+            map = Objects.requireNonNull(task.getResult()).getData());
     }
 
     public Task<QuerySnapshot> getJugadorsCompeticioGrup(String competicio, String grup){
         return super.getFirebaseFirestore().collection("Equip").document(competicio).collection("Grups")
                 .document(grup).collection("Equips").get().addOnCompleteListener(task -> {
-            for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments() ) {
+            for (DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult()).getDocuments() ) {
                 equips.add(documentSnapshot.getId());
                 ArrayList<String> jugadorsFirestore = (ArrayList<String>) documentSnapshot.get("jugadors");
                 if (jugadorsFirestore != null) {
@@ -96,7 +97,7 @@ public class FirebaseOperationsPlantillaPage extends FirebaseOperations {
                         jugadorsEquip.add(new Jugador(nomJugador, documentSnapshot.getId()));
                     }
                 }
-                jugadors.addAll(jugadorsFirestore);
+                jugadors.addAll(Objects.requireNonNull(jugadorsFirestore));
             }
         });
     }

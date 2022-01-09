@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_weight="43"
         android:gravity="center|center_horizontal|center_vertical"
-        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
         android:textAlignment="center"
         android:textColor="#000000" />
 
@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="43"
-        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
         android:textAlignment="center"
         android:textColor="#000000" />
 

@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class FirebaseOperationsRegisterPage extends FirebaseOperations{
 
@@ -22,7 +23,7 @@ public class FirebaseOperationsRegisterPage extends FirebaseOperations{
         super.getFirebaseAuth().createUserWithEmailAndPassword(email,
                 password).addOnCompleteListener(task -> {
             if ( task.isSuccessful() ) {
-                task.getResult().getUser().sendEmailVerification().addOnCompleteListener(task1 -> {
+                Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).sendEmailVerification().addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()){
                         Log.d("RGSR", "Email sent");
                         super.getUtilsProject().makeToast("S'ha enviat un mail per confirmar la teva compte!");

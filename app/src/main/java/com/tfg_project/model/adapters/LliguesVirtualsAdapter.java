@@ -54,11 +54,11 @@ public class LliguesVirtualsAdapter extends
         return lliguesVirtualsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNomLliga;
-        private TextView tvCompeticio;
-        private TextView tvGrup;
-        private TextView tvParticipants;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvNomLliga;
+        private final TextView tvCompeticio;
+        private final TextView tvGrup;
+        private final TextView tvParticipants;
 
         public ViewHolder(View itemView) {
             super(itemView);
