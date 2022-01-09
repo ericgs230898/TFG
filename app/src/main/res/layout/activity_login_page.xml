@@ -120,7 +120,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bLoginIniciaSesio" />
+        app:layout_constraintTop_toBottomOf="@+id/bLoginIniciaSesio"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/tvForgotPassword"
@@ -133,5 +134,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRegisterNoAccount" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRegisterNoAccount"
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

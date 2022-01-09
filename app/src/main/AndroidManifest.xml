@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".controlador.AdminPage"></activity>
-        <activity android:name=".controlador.Puntuacions"></activity>
+        <activity android:name=".controlador.AdminPage" />
+        <activity android:name=".controlador.Puntuacions" />
         <activity android:name=".controlador.ResultatsPartitPage" />
         <activity android:name=".controlador.ResultatsPage" />
         <activity android:name=".controlador.MenuLligaVirtual" />
@@ -21,7 +21,7 @@
         <activity android:name=".controlador.PlantillaPage" />
         <activity android:name=".controlador.MenuPrincipal" />
         <activity android:name=".controlador.RegisterPage" />
-        <activity android:name=".controlador.LoginPage">
+        <activity android:name=".controlador.LoginPage" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

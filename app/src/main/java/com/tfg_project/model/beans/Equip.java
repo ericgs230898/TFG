@@ -1,8 +1,8 @@
 package com.tfg_project.model.beans;
 
 public class Equip {
-    String nomEquip;
-    String linkEquip;
+    final String nomEquip;
+    final String linkEquip;
 
     public Equip(String nomEquip, String linkEquip) {
         this.nomEquip = nomEquip;
@@ -13,15 +13,7 @@ public class Equip {
         return nomEquip;
     }
 
-    public void setNomEquip(String nomEquip) {
-        this.nomEquip = nomEquip;
-    }
-
     public String getLinkEquip() {
         return linkEquip;
-    }
-
-    public void setLinkEquip(String linkEquip) {
-        this.linkEquip = linkEquip;
     }
 }

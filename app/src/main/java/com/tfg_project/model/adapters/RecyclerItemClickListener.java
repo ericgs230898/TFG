@@ -9,15 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
-    private OnItemClickListener pListener;
+    private final OnItemClickListener pListener;
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(int position);
 
-        public void onLongItemClick(View view, int position);
+        void onLongItemClick();
     }
 
-    GestureDetector mGestureDetector;
+    final GestureDetector mGestureDetector;
 
     public RecyclerItemClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener) {
         this.pListener = listener;
@@ -31,7 +31,7 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
             public void onLongPress(MotionEvent e) {
                 View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                 if (child != null && pListener != null) {
-                    pListener.onLongItemClick(child, recyclerView.getChildAdapterPosition(child));
+                    pListener.onLongItemClick();
                 }
             }
         });
@@ -41,7 +41,7 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
     public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
         View childView = view.findChildViewUnder(e.getX(), e.getY());
         if (childView != null && pListener != null && mGestureDetector.onTouchEvent(e)) {
-            pListener.onItemClick(childView, view.getChildAdapterPosition(childView));
+            pListener.onItemClick(view.getChildAdapterPosition(childView));
             return true;
         }
         return false;
@@ -49,11 +49,11 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
 
     @Override
     public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
+        // not implemented
     }
 
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
+        // not implemented
     }
 }

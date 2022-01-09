@@ -50,7 +50,7 @@ public class ServiceDataJornades {
                         e.printStackTrace();
                     }
                 }
-                ArrayList<Date> dates = new ArrayList<Date>();
+                ArrayList<Date> dates = new ArrayList<>();
                 String textString = text.toString();
                 int indexData = textString.indexOf("lh-data");
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -65,7 +65,6 @@ public class ServiceDataJornades {
                     if (!dataBuilder.toString().equals("")) {
                         Date date = sdf.parse(dataBuilder.toString());
                         dates.add(date);
-                        System.out.println("DATA ----> " + dataBuilder.toString() + "  " + dataBuilder.toString().length());
                     }
                     indexData = textString.indexOf("lh-data", indexData+1);
                 }

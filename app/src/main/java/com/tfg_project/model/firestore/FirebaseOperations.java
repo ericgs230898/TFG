@@ -7,10 +7,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.tfg_project.model.utils.UtilsProject;
 
 public class FirebaseOperations {
-    private FirebaseFirestore firebaseFirestore;
-    private FirebaseAuth firebaseAuth;
-    private UtilsProject utilsProject;
-    private Context context;
+    private final FirebaseFirestore firebaseFirestore;
+    private final FirebaseAuth firebaseAuth;
+    private final UtilsProject utilsProject;
 
     public FirebaseOperations(Context context) {
         this.firebaseFirestore = FirebaseFirestore.getInstance();
@@ -22,31 +21,11 @@ public class FirebaseOperations {
         return firebaseFirestore;
     }
 
-    public void setFirebaseFirestore(FirebaseFirestore firebaseFirestore) {
-        this.firebaseFirestore = firebaseFirestore;
-    }
-
     public FirebaseAuth getFirebaseAuth() {
         return firebaseAuth;
     }
 
-    public void setFirebaseAuth(FirebaseAuth firebaseAuth) {
-        this.firebaseAuth = firebaseAuth;
-    }
-
     public UtilsProject getUtilsProject() {
         return utilsProject;
-    }
-
-    public void setUtilsProject(UtilsProject utilsProject) {
-        this.utilsProject = utilsProject;
-    }
-
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
     }
 }

@@ -1,9 +1,9 @@
 package com.tfg_project.model.beans;
 
 public class JornadaData {
-    private String jornada;
-    private String dataMin;
-    private String dataMax;
+    private final String jornada;
+    private final String dataMin;
+    private final String dataMax;
 
     public JornadaData(String jornada, String dataMin, String dataMax) {
         this.jornada = jornada;
@@ -15,23 +15,12 @@ public class JornadaData {
         return jornada;
     }
 
-    public void setJornada(String jornada) {
-        this.jornada = jornada;
-    }
-
     public String getDataMin() {
         return dataMin;
-    }
-
-    public void setDataMin(String dataMin) {
-        this.dataMin = dataMin;
     }
 
     public String getDataMax() {
         return dataMax;
     }
 
-    public void setDataMax(String dataMax) {
-        this.dataMax = dataMax;
-    }
 }

@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class UtilsProject {
-    private Context context;
+    private final Context context;
 
     public UtilsProject(Context context) {
         this.context = context;
@@ -31,24 +31,24 @@ public class UtilsProject {
     }
 
     public static boolean isValidPassword(String s) {
-        Pattern PASSWORD_PATTERN
+        Pattern passwordPattern
                 = Pattern.compile(
-                "[a-zA-Z0-9\\!\\@\\#\\$]{8,24}");
+                "[a-zA-Z0-9!@#$]{8,24}");
 
-        return !TextUtils.isEmpty(s) && PASSWORD_PATTERN.matcher(s).matches();
+        return TextUtils.isEmpty(s) || !passwordPattern.matcher(s).matches();
     }
 
     public static boolean isValidMail(String s){
-        Pattern MAIL_PATTERN
+        Pattern mailPattern
                 = Pattern.compile("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
-        return !TextUtils.isEmpty(s) && MAIL_PATTERN.matcher(s).matches();
+        return !TextUtils.isEmpty(s) && mailPattern.matcher(s).matches();
     }
 
     public static boolean isValidUsername(String s){
-        Pattern USERNAME_PATTERN
+        Pattern usernamePattern
                 = Pattern.compile(
                 "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$");
-        return !TextUtils.isEmpty(s) && USERNAME_PATTERN.matcher(s).matches();
+        return !TextUtils.isEmpty(s) && usernamePattern.matcher(s).matches();
     }
 
     public boolean checkParameters(String email, String password) {
@@ -56,7 +56,7 @@ public class UtilsProject {
             makeToast("El mail: " + email +  " no té un format correcte");
             return false;
         }
-        if (!isValidPassword(password)){
+        if (isValidPassword(password)){
             makeToast("El password no té un format correcte");
             return false;
         }
@@ -74,7 +74,7 @@ public class UtilsProject {
         else if (!password1.equals(password2)){
             makeToast("Las contraseñas no coinciden");
             return false;
-        } else if ( !isValidPassword(password1)){
+        } else if (isValidPassword(password1)){
             makeToast("La contraseña no concuerda con el formato");
             return false;
         } else if ( !isValidMail(email)){

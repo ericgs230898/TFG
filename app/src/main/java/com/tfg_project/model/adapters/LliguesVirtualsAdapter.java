@@ -17,7 +17,7 @@ import java.util.List;
 public class LliguesVirtualsAdapter extends
         RecyclerView.Adapter<LliguesVirtualsAdapter.ViewHolder> {
 
-    private List<LliguesVirtuals> lliguesVirtualsList;
+    private final List<LliguesVirtuals> lliguesVirtualsList;
 
     public LliguesVirtualsAdapter(List<LliguesVirtuals> lliguesVirtuals){
         this.lliguesVirtualsList = lliguesVirtuals;
@@ -38,13 +38,13 @@ public class LliguesVirtualsAdapter extends
     public void onBindViewHolder(@NonNull LliguesVirtualsAdapter.ViewHolder holder, int position) {
         LliguesVirtuals lliguesVirtuals = lliguesVirtualsList.get(position);
 
-        TextView textView = holder.tvNomLliga;
+        TextView textView = holder.getTvNomLliga();
         textView.setText(lliguesVirtuals.getNomLligaVirtual());
-        TextView textView1 = holder.tvParticipants;
+        TextView textView1 = holder.getTvParticipants();
         textView1.setText(lliguesVirtuals.getParticipants());
-        TextView textView2 = holder.tvCompeticio;
+        TextView textView2 = holder.getTvCompeticio();
         textView2.setText(lliguesVirtuals.getCompeticio());
-        TextView textView3 = holder.tvGrup;
+        TextView textView3 = holder.getTvGrup();
         textView3.setText(lliguesVirtuals.getGrup());
 
     }
@@ -54,11 +54,11 @@ public class LliguesVirtualsAdapter extends
         return lliguesVirtualsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNomLliga;
-        public TextView tvCompeticio;
-        public TextView tvGrup;
-        public TextView tvParticipants;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvNomLliga;
+        private final TextView tvCompeticio;
+        private final TextView tvGrup;
+        private final TextView tvParticipants;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -66,6 +66,22 @@ public class LliguesVirtualsAdapter extends
             tvCompeticio = itemView.findViewById(R.id.tvCompeticio);
             tvParticipants = itemView.findViewById(R.id.tvParticipants);
             tvGrup = itemView.findViewById(R.id.tvGrup);
+        }
+
+        public TextView getTvNomLliga() {
+            return tvNomLliga;
+        }
+
+        public TextView getTvCompeticio() {
+            return tvCompeticio;
+        }
+
+        public TextView getTvGrup() {
+            return tvGrup;
+        }
+
+        public TextView getTvParticipants() {
+            return tvParticipants;
         }
     }
 }

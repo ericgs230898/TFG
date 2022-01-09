@@ -13,12 +13,13 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_atacante1_541"
@@ -34,7 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1_modif" />
+                app:srcCompat="@drawable/icon_player1_modif"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
     </LinearLayout>
@@ -55,7 +57,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_medio1_541"
@@ -71,7 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1_modif" />
+                app:srcCompat="@drawable/icon_player1_modif"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +84,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_medio2_541"
@@ -96,7 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1" />
+                app:srcCompat="@drawable/icon_player1"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <LinearLayout
@@ -105,7 +111,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_medio3_541"
@@ -121,7 +128,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1" />
+                app:srcCompat="@drawable/icon_player1"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,7 +138,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_medio4_541"
@@ -146,7 +155,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1_modif" />
+                app:srcCompat="@drawable/icon_player1_modif"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
     </LinearLayout>
@@ -167,7 +177,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_defensa1_541"
@@ -184,7 +195,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1_modif" />
+                app:srcCompat="@drawable/icon_player1_modif"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <LinearLayout
@@ -193,7 +205,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_defensa2_541"
@@ -210,7 +223,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1" />
+                app:srcCompat="@drawable/icon_player1"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <LinearLayout
@@ -219,7 +233,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_defensa3_541"
@@ -236,7 +251,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1" />
+                app:srcCompat="@drawable/icon_player1"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <LinearLayout
@@ -245,7 +261,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_defensa4_541"
@@ -262,7 +279,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1" />
+                app:srcCompat="@drawable/icon_player1"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
         <LinearLayout
@@ -271,7 +289,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_defensa5_541"
@@ -288,7 +307,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1" />
+                app:srcCompat="@drawable/icon_player1"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
     </LinearLayout>
@@ -304,12 +324,13 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:onClick="createDialog"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/tv_portero_541"
@@ -325,7 +346,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/icon_player1_modif" />
+                app:srcCompat="@drawable/icon_player1_modif"
+                android:contentDescription="TODO" />
         </LinearLayout>
 
     </LinearLayout>

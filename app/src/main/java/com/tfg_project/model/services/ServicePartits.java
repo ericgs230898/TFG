@@ -8,25 +8,23 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ServicePartits {
-    private static List<String> competicions = Arrays.asList("quarta-catalana");
-    private static List<String> jornades = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+    private final static List<String> competicions = Collections.singletonList("quarta-catalana");
+    private final static List<String> jornades = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
             "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40");
 
-    private static List<String> grups = Arrays.asList("20","21","23","24","27","28","29","30");
+    private final static List<String> grups = Arrays.asList("20","21","23","24","27","28","29","30");
 
-    private String linea = "<tr class=\"linia\">";
-    private String equipLocalLink = "<td class=\"p-5 resultats-w-equip tr\">";
-    private String equipVisitantLink = "<td class=\"p-5 resultats-w-equip tl\">";
-    private String actaLink = "<td class=\"p-5 resultats-w-resultat tc\">";
-    private String resultatLink = "<div class=\"tc fs-17 white bg-darkgrey p-r\">";
+    private final String linea = "<tr class=\"linia\">";
+    private final String resultatLink = "<div class=\"tc fs-17 white bg-darkgrey p-r\">";
 
     public ServicePartits() {
     }
 
-    private ArrayList<Partit> partits = new ArrayList<>();
+    private final ArrayList<Partit> partits = new ArrayList<>();
 
     public ArrayList<Partit> ejecutar(){
         List<Thread> threads = new ArrayList<>();
@@ -87,25 +85,28 @@ public class ServicePartits {
         partit.setCompeticio(competicio);
         partit.setGrup("grup"+grup);
         partit.setJornada("jornada"+jornada);
+        String equipLocalLink = "<td class=\"p-5 resultats-w-equip tr\">";
         int localIndexInici = string.indexOf(equipLocalLink);
         if ( localIndexInici != -1 ) partit.setEquipLocal(getEquip(string, localIndexInici));
         else partit.setEquipLocal("");
+        String equipVisitantLink = "<td class=\"p-5 resultats-w-equip tl\">";
         int visitanteIndexInici = string.indexOf(equipVisitantLink);
         if ( visitanteIndexInici != -1 ) partit.setEquipVisitante(getEquip(string, visitanteIndexInici));
         else partit.setEquipVisitante("");
-        int resultIndex = string.indexOf(actaLink);
+        String actaLink1 = "<td class=\"p-5 resultats-w-resultat tc\">";
+        int resultIndex = string.indexOf(actaLink1);
         String subStringResultat = string.substring(resultIndex, visitanteIndexInici);
-        if ( textString.indexOf("ACTA TANCADA") != -1 ) {
+        if (textString.contains("ACTA TANCADA")) {
             if (resultIndex != -1 && visitanteIndexInici != -1) {
                 partit.setCondicioPartit("-");
                 String result = getResultat(string);
-                if (result == "") return null;
+                if (result.equals("")) return null;
                 int indexGuion = result.indexOf('-');
                 String golesLocal = result.substring(0, indexGuion);
                 String golesVisitante = result.substring(indexGuion + 1);
-                partit.setGolesLocal(Integer.valueOf(golesLocal.trim()));
-                partit.setGolesVisitante(Integer.valueOf(golesVisitante.trim()));
-                int actaIndex = string.indexOf(actaLink);
+                partit.setGolesLocal(Integer.parseInt(golesLocal.trim()));
+                partit.setGolesVisitante(Integer.parseInt(golesVisitante.trim()));
+                int actaIndex = string.indexOf(actaLink1);
                 String actaLink = getActa(string, actaIndex);
                 partit.setActa(actaLink);
             }

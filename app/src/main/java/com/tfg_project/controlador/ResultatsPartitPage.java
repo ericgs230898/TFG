@@ -1,6 +1,7 @@
 package com.tfg_project.controlador;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -24,7 +25,6 @@ import java.util.List;
 
 public class ResultatsPartitPage extends AppCompatActivity {
 
-    // private static final String TAG = "RESULTATS_PARTIT_PAGE_TAG";
     private static final String DOS_PUNTS = ": ";
     private static final String ENTER = "\n";
 
@@ -49,12 +49,11 @@ public class ResultatsPartitPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultats_partit_page);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         initializeVariables();
         setAdapterJugadorResultat();
 
-        final String competicio = this.getIntent().getStringExtra("competicio");
-        final String grup = this.getIntent().getStringExtra("grup");
-        final String jornada = this.getIntent().getStringExtra("jornada");
         final String equipLocal = this.getIntent().getStringExtra("equipLocal");
         final String equipVisitant = this.getIntent().getStringExtra("equipVisitant");
         final String jugadorsLocal = this.getIntent().getStringExtra("loc");
@@ -64,7 +63,7 @@ public class ResultatsPartitPage extends AppCompatActivity {
         final Type listType = new TypeToken<List<PartitJugador>>(){}.getType();
         final List<PartitJugador> jugLocals = new Gson().fromJson(jugadorsLocal, listType);
         final List<PartitJugador> jugVisitants = new Gson().fromJson(jugadorsVisitant, listType);
-        titlePartit.setText(new StringBuilder().append(equipLocal).append(DOS_PUNTS).append(golesLocal).append(ENTER).append(equipVisitant).append(DOS_PUNTS).append(golesVisitant).toString());
+        titlePartit.setText(equipLocal + DOS_PUNTS + golesLocal + ENTER + equipVisitant + DOS_PUNTS + golesVisitant);
 
         final TextView tvLocal = findViewById(R.id.tvEquipLocalResultatPage);
         final TextView tvVisitant = findViewById(R.id.tvEquipVisitantResultatPage);
@@ -123,27 +122,25 @@ public class ResultatsPartitPage extends AppCompatActivity {
 
         recyclerViewLocalTitulars.addOnItemTouchListener(new RecyclerItemClickListener(context, recyclerViewLocalTitulars, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(int position) {
                 showAlertDialog(jugadorResultatListLocalTitulars.get(position));
-                System.out.println(jugadorResultatListLocalTitulars.get(position).getNom());
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
-
+            public void onLongItemClick() {
+            // non implemented
             }
         }));
 
         recyclerViewLocalSuplents.addOnItemTouchListener(new RecyclerItemClickListener(context, recyclerViewLocalSuplents, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(int position) {
                 showAlertDialog(jugadorResultatListLocalSuplents.get(position));
-                System.out.println(jugadorResultatListLocalSuplents.get(position).getNom());
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
-
+            public void onLongItemClick() {
+                // non implemented
             }
         }));
 
@@ -194,41 +191,41 @@ public class ResultatsPartitPage extends AppCompatActivity {
 
         recyclerViewVisitantTitulars.addOnItemTouchListener(new RecyclerItemClickListener(context, recyclerViewVisitantTitulars, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(int position) {
                 showAlertDialog(jugadorResultatListVisitantTitulars.get(position));
-                System.out.println(jugadorResultatListVisitantTitulars.get(position).getNom());
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
-
+            public void onLongItemClick() {
+                // non implemented
             }
         }));
 
         recyclerViewVisitantSuplents.addOnItemTouchListener(new RecyclerItemClickListener(context, recyclerViewVisitantSuplents, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(int position) {
                 showAlertDialog(jugadorResultatListVisitantSuplents.get(position));
-                System.out.println(jugadorResultatListVisitantSuplents.get(position).getNom());
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
-
+            public void onLongItemClick() {
+                // non implemented
             }
         }));
-
-        System.out.println(competicio + " " + grup + " " + jornada + " " + equipLocal + " " + equipVisitant);
-        System.out.println(jugadorsLocal);
-        System.out.println(jugadorsVisitant);
-
     }
 
     private void showAlertDialog(JugadorResultat pj) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ESTADÍSTIQUES D'UN JUGADOR");
         final View customLayout = getLayoutInflater().inflate(R.layout.linear_layout_alert_dialog_resultat, null);
-        TextView tvNom, tvMinuts, tvGols, tvGolsPenal, tvGolsPP, tvGrogues, tvVermelles, tvGolesEncajados;
+        TextView tvNom;
+        TextView tvMinuts;
+        TextView tvGols;
+        TextView tvGolsPenal;
+        TextView tvGolsPP;
+        TextView tvGrogues;
+        TextView tvVermelles;
+        TextView tvGolesEncajados;
         tvNom = customLayout.findViewById(R.id.tvJugadorsNom);
         tvMinuts = customLayout.findViewById(R.id.tvJugadorsMinuts);
         tvGols = customLayout.findViewById(R.id.tvJugadorsGols);
@@ -238,17 +235,17 @@ public class ResultatsPartitPage extends AppCompatActivity {
         tvVermelles = customLayout.findViewById(R.id.tvJugadorsVermelles);
         tvGolesEncajados = customLayout.findViewById(R.id.tvJugadorsGolesEncajados);
         tvNom.setText(pj.getNom());
-        tvMinuts.setText(new StringBuilder().append(getString(R.string.minuts_jugats)).append(DOS_PUNTS).append(pj.getMinutsJugats()).toString());
-        tvGols.setText(new StringBuilder().append(getString(R.string.gols_marcats)).append(DOS_PUNTS).append(pj.getGolesMarcados()).toString());
-        tvGolsPenal.setText(new StringBuilder().append(getString(R.string.gols_penal)).append(DOS_PUNTS).append(pj.getGolesMarcadosPenalti()).toString());
-        tvGolsPP.setText(new StringBuilder().append(getString(R.string.gols_propia)).append(DOS_PUNTS).append(String.valueOf(pj.getGolesMarcadosPropia())).toString());
-        if ( pj.isPortero() ) tvGolesEncajados.setText(new StringBuilder().append(getString(R.string.gols_rebuts)).append(DOS_PUNTS).append(pj.getGolesEncajados()).toString());
+        tvMinuts.setText(getString(R.string.minuts_jugats) + DOS_PUNTS + pj.getMinutsJugats());
+        tvGols.setText(getString(R.string.gols_marcats) + DOS_PUNTS + pj.getGolesMarcados());
+        tvGolsPenal.setText(getString(R.string.gols_penal) + DOS_PUNTS + pj.getGolesMarcadosPenalti());
+        tvGolsPP.setText(getString(R.string.gols_propia) + DOS_PUNTS + pj.getGolesMarcadosPropia());
+        if ( pj.isPortero() ) tvGolesEncajados.setText(getString(R.string.gols_rebuts) + DOS_PUNTS + pj.getGolesEncajados());
         int grogues = 0;
         if ( pj.isTarjetaAmarilla1()) grogues++;
         if ( pj.isTarjetaAmarilla2()) grogues++;
-        tvGrogues.setText(new StringBuilder().append(getString(R.string.targetes_grogues)).append(DOS_PUNTS).append(grogues).toString());
-        if ( pj.isTarjetaRoja1() ) tvVermelles.setText(new StringBuilder().append(getString(R.string.targetes_vermelles)).append(DOS_PUNTS).append("1").toString());
-        else tvVermelles.setText(new StringBuilder().append(getString(R.string.targetes_vermelles)).append(DOS_PUNTS).append("0").toString());
+        tvGrogues.setText(getString(R.string.targetes_grogues) + DOS_PUNTS + grogues);
+        if ( pj.isTarjetaRoja1() ) tvVermelles.setText(getString(R.string.targetes_vermelles) + DOS_PUNTS + "1");
+        else tvVermelles.setText(getString(R.string.targetes_vermelles) + DOS_PUNTS + "0");
 
 
         builder.setView(customLayout);

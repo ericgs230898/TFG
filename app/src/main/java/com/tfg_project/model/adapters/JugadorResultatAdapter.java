@@ -18,8 +18,8 @@ import com.tfg_project.model.beans.JugadorResultat;
 import java.util.List;
 
 public class JugadorResultatAdapter extends RecyclerView.Adapter<JugadorResultatAdapter.ViewHolder> {
-    private List<JugadorResultat> jugadorResultatsList;
-    private Context context;
+    private final List<JugadorResultat> jugadorResultatsList;
+    private final Context context;
 
     public JugadorResultatAdapter(Context context, List<JugadorResultat> jugadorResultatsList){
         this.jugadorResultatsList = jugadorResultatsList;
@@ -29,25 +29,24 @@ public class JugadorResultatAdapter extends RecyclerView.Adapter<JugadorResultat
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+        Context contextParent = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(contextParent);
 
         View jugadorsResultatView = inflater.inflate(R.layout.linear_layout_jugador_partit, parent, false);
 
-        return new JugadorResultatAdapter.ViewHolder(jugadorsResultatView);
+        return new ViewHolder(jugadorsResultatView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull JugadorResultatAdapter.ViewHolder holder, int position) {
         JugadorResultat jugadorResultat = jugadorResultatsList.get(position);
 
-        TextView textView = holder.tvNomJugador;
+        TextView textView = holder.getTvNomJugador();
         StringBuilder stringBuilder = new StringBuilder(" ");
         if ( jugadorResultat.isPortero() ) stringBuilder.append(jugadorResultat.getNom()).append(" (Porter)");
         else stringBuilder.append(jugadorResultat.getNom());
         textView.setText(stringBuilder.toString());
-        LinearLayout llJugador = holder.linearLayout;
-
+        LinearLayout llJugador = holder.getLinearLayout();
         for ( int i=0; i<jugadorResultat.getGolesMarcados(); i++ ) {
             ImageView iv = getImageView(R.drawable.gol);
             llJugador.addView(iv);
@@ -76,20 +75,13 @@ public class JugadorResultatAdapter extends RecyclerView.Adapter<JugadorResultat
 
     private ImageView getImageView(int resource) {
         ImageView imageView = new ImageView(context);
-        imageView.setImageResource(resource);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(50,50, 50);
+        imageView.setBackgroundResource(resource);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(50,50);
+        layoutParams.setMargins(5,0,5,0);
         layoutParams.gravity = Gravity.CENTER;
         imageView.setLayoutParams(layoutParams);
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         return imageView;
-    }
-
-    private static int getImageResourceByAccio(String accio) {
-        if ( accio.equals("TarjetaAmarilla")) return R.drawable.tarjeta_amarilla;
-        else if ( accio.equals("TarjetaRoja")) return R.drawable.tarjeta_roja;
-        else if ( accio.equals("Gol")) return R.drawable.gol;
-        else if ( accio.equals("GolPenalti")) return R.drawable.golpenal;
-        else return R.drawable.golpropia;
     }
 
     @Override
@@ -98,14 +90,22 @@ public class JugadorResultatAdapter extends RecyclerView.Adapter<JugadorResultat
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNomJugador;
-        public LinearLayout linearLayout;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvNomJugador;
+        private final LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNomJugador = itemView.findViewById(R.id.tvNomJugadorResultat);
             linearLayout = itemView.findViewById(R.id.linearLayoutPartitJugador);
+        }
+
+        public TextView getTvNomJugador() {
+            return tvNomJugador;
+        }
+
+        public LinearLayout getLinearLayout() {
+            return linearLayout;
         }
     }
 }

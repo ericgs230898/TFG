@@ -14,13 +14,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ServiceEquipsFCF {
 
-    protected static final List<String> competicions = Arrays.asList("quarta-catalana");//, "tercera-catalana", "segona-catalana", "primera-catalana");
+    protected static final List<String> competicions = Collections.singletonList("quarta-catalana");//, "tercera-catalana", "segona-catalana", "primera-catalana");
     protected static final List<String> grups = Arrays.asList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11", "13", "14", "15", "16", "17", "20", "21", "23", "24", "27", "28", "29", "30");
 
     public void getEquipsParticipants() {
@@ -88,9 +89,7 @@ public class ServiceEquipsFCF {
                                         .document("grup"+grups.get(finalJ))
                                         .collection("Equips").document(equip.getNomEquip());
 
-                                documentReference.set(mapEquip).addOnCompleteListener(task -> {
-                                    System.out.println("FINISH");
-                                        });
+                                documentReference.set(mapEquip).addOnCompleteListener(task -> System.out.println("FINISH"));
 
                             }
                             /*db.collection("Equips").document(competicions.get(finalI) + grups.get(finalJ)).set(equips).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -1,6 +1,7 @@
 package com.tfg_project.controlador;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,18 +21,14 @@ import com.tfg_project.model.utils.UtilsProject;
 
 public class PerfilPage extends AppCompatActivity {
 
-    private static final String TAG = "PERFIL_PAGE_TAG";
-
     private TextView tvMail;
     private EditText etUsername;
     private String mail;
-    private String username;
     private ImageButton backButton;
     private Button bTancarSessio;
     private Button bEliminarCompte;
     private Button bModificarDades;
     private AlertDialog alertDialog;
-    private Context context;
     private UtilsProject utilsProject;
     private FirebaseOperationsPerfilPage firebaseOperationsPerfilPage;
 
@@ -39,6 +36,8 @@ public class PerfilPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_page);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         initializeVariables();
 
@@ -59,7 +58,7 @@ public class PerfilPage extends AppCompatActivity {
 
         bModificarDades.setOnClickListener(view -> {
             String newUsername = etUsername.getText().toString();
-            if (utilsProject.isValidUsername(newUsername)){
+            if (UtilsProject.isValidUsername(newUsername)){
                 firebaseOperationsPerfilPage.modificaDadesUsuari(newUsername);
             } else {
                 utilsProject.makeToast("Nom d'usuari no vàlid");
@@ -71,20 +70,17 @@ public class PerfilPage extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Eliminar compte");
         builder.setMessage("Estàs segur que vols eliminar el teu compte? \n Les teves dades i el teu progrès serà eliminat completament.");
-        builder.setPositiveButton("Si", (dialogInterface, i) -> {
-            firebaseOperationsPerfilPage.eliminaUsuari();
-        });
+        builder.setPositiveButton("Si", (dialogInterface, i) -> firebaseOperationsPerfilPage.eliminaUsuari());
         builder.setNegativeButton("No", (dialogInterface, i) -> alertDialog.dismiss());
         alertDialog = builder.create();
         alertDialog.show();
     }
 
     private void initializeVariables() {
-        context = this;
+        Context context = this;
         utilsProject = new UtilsProject(context);
         tvMail = findViewById(R.id.tvAccountMail);
         mail = this.getIntent().getStringExtra("mail");
-        username = this.getIntent().getStringExtra("username");
         etUsername = findViewById(R.id.etPerfilUsername);
         backButton = findViewById(R.id.backButtonAccountPage);
         bTancarSessio = findViewById(R.id.bTancarSessio);

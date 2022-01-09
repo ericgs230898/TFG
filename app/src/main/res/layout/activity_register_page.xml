@@ -173,7 +173,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/bRegister"
+        android:focusable="true" />
 
     <ImageButton
         android:id="@+id/backButton"
@@ -183,5 +184,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        app:srcCompat="?attr/homeAsUpIndicator"
+        android:contentDescription="TODO" />
 </androidx.constraintlayout.widget.ConstraintLayout>

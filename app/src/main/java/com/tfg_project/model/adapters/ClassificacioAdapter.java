@@ -19,7 +19,7 @@ import java.util.List;
 public class ClassificacioAdapter extends
         RecyclerView.Adapter<ClassificacioAdapter.ViewHolder> {
 
-    private List<ClassificacioBean> classificacioAdapterList;
+    private final List<ClassificacioBean> classificacioAdapterList;
 
     public ClassificacioAdapter(List<ClassificacioBean> classificacioAdapterList) {
         this.classificacioAdapterList = classificacioAdapterList;
@@ -33,18 +33,18 @@ public class ClassificacioAdapter extends
 
         View classificacioView = inflater.inflate(R.layout.linear_layout_classificacio, parent, false);
 
-        return new ClassificacioAdapter.ViewHolder(classificacioView);
+        return new ViewHolder(classificacioView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClassificacioAdapter.ViewHolder holder, int position) {
         ClassificacioBean classificacioBean = classificacioAdapterList.get(position);
 
-        TextView tvPunts = holder.tvPuntsUsuari;
+        TextView tvPunts = holder.getTvPuntsUsuari();
         tvPunts.setText(classificacioBean.getPunts());
-        TextView tvUsername = holder.tvNomUsuari;
+        TextView tvUsername = holder.getTvNomUsuari();
         tvUsername.setText(classificacioBean.getUsername());
-        ImageView posicio = holder.ivPosicio;
+        ImageView posicio = holder.getIvPosicio();
         posicio.setLayoutParams(new LinearLayout.LayoutParams(120, 120));
         posicio.setScaleType(ImageView.ScaleType.FIT_CENTER);
         if ( position == 0 ) {
@@ -61,16 +61,28 @@ public class ClassificacioAdapter extends
         return classificacioAdapterList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNomUsuari;
-        public TextView tvPuntsUsuari;
-        public ImageView ivPosicio;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvNomUsuari;
+        private final TextView tvPuntsUsuari;
+        private final ImageView ivPosicio;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNomUsuari = itemView.findViewById(R.id.tvClassificacioUsuari);
             tvPuntsUsuari = itemView.findViewById(R.id.tvClassificacioPunts);
             ivPosicio = itemView.findViewById(R.id.ivPosicioClassificacio);
+        }
+
+        public TextView getTvNomUsuari() {
+            return tvNomUsuari;
+        }
+
+        public TextView getTvPuntsUsuari() {
+            return tvPuntsUsuari;
+        }
+
+        public ImageView getIvPosicio() {
+            return ivPosicio;
         }
     }
 }

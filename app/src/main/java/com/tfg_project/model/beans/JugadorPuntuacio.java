@@ -1,9 +1,9 @@
 package com.tfg_project.model.beans;
 
 public class JugadorPuntuacio {
-    private String posicio;
-    private String nomJugador;
-    private String punts;
+    private final String posicio;
+    private final String nomJugador;
+    private final String punts;
 
     public JugadorPuntuacio(String posicio, String nomJugador, String punts) {
         this.posicio = posicio;
@@ -15,23 +15,11 @@ public class JugadorPuntuacio {
         return posicio;
     }
 
-    public void setPosicio(String posicio) {
-        this.posicio = posicio;
-    }
-
     public String getNomJugador() {
         return nomJugador;
     }
 
-    public void setNomJugador(String nomJugador) {
-        this.nomJugador = nomJugador;
-    }
-
     public String getPunts() {
         return punts;
-    }
-
-    public void setPunts(String punts) {
-        this.punts = punts;
     }
 }

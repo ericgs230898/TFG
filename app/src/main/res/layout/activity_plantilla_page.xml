@@ -89,7 +89,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        android:contentDescription="TODO" />
 
     <Button
         android:id="@+id/bGuardarPlantilla"
